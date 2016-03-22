@@ -113,7 +113,7 @@
                         <option value="12a24231">ScoobyDoo</option>
                     </select>
 
-                    <input type="submit" value="Submit" >
+                    <input type="submit" ng-value="cc.submitLoad()" >
                 </form>
                 <!--testing $HTML-->
                 <p ng-bind="cc.tester"></p>
@@ -155,10 +155,10 @@
                 var makeUrl = function(){
                     url = baseUrl + char + "&callback=JSON_CALLBACK"
                 };
-                this.setInfo = function(s){
-                    char = s;
+                this.setInfo = function(charObj){
+                    char = charObj;
                 };
-                this.createCharacter = function(d){
+                this.createCharacter = function(){
                     makeUrl();
                     console.log(url);
 
@@ -175,32 +175,36 @@
                 this.tester = characterService.test;
                 characterScope = this;
                 this.char = {};
-                this.loading = false;
+                this.loading = "Submit";
                 this.logIt = function(){
                     console.log(this.char);
-                    this.char = {};
+
                 };
+
                 this.data = {};
                 this.results = characterService.results;
 
                 this.sendCharInfo = function(){
                     characterService.setInfo(this.char.name);
                 };
-                this.toggleSpin = function(){
-                    console.log("spinning");
-                    $(this).toggleClass('active');
+
+                this.submitLoad = function(){
+                    return this.loading;
                 };
 
                 this.sendCharacter = function(){
-                    this.loading = true;
+                    this.loading = "Loading";
                     this.sendCharInfo();
                     characterService.createCharacter()
                             .then(function(data){
-                                self.data = data.results;
-                                characterScope.loading = false;
+                                console.log(data);
+                                characterScope.data = data.results;
+                                characterScope.loading = "Submit";
+                                characterScope.char = {};
+
                             }, function(data){
                                 $log.warn(data);
-                                characterScope.loading = false;
+                                characterScope.loading = "Submit";
                             });
                 };
             })
