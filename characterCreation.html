@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.angularjs.org/1.4.0/angular.js"></script>
+    <style>
+        body {
+            font-family: Arial;
+            box-sizing: border-box;
+        }
+
+        input[type=text], select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 12px 20px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+            resize: none;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #4ed1ff;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #2efaff;
+        }
+
+        #dummyContain {
+            display: flex;
+            flex-flow: row wrap;
+        }
+
+        #mainContent {
+            width: 70%;
+            height: 100%;
+            border-radius: 5px;
+            background-color: #a59ef2;
+            padding: 40px;
+        }
+
+        #fakeSide {
+            border: 1px solid black;
+            width: 15%;
+            height: 85vh;
+        }
+
+        #fakeTop {
+            border: 1px solid black;
+            height: 15vh;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<div id="dummyContain">
+    <div id="fakeTop"></div>
+    <aside id="fakeSide"></aside>
+    <div id="mainContent" ng-app="fakeApp" ng-controller="characterController as cc">
+        <h3>Create New Character</h3>
+        <div>
+            <form  ng-submit="cc.sendCharacter()">
+                <label for="cName">Name</label>
+                <input type="text" id="cName" name="name" ng-model="cc.char.cName">
+
+                <label for="cApperance">Physical Appearance</label>
+                <textarea type="text" id="cApperance" name="apperance" ng-model="cc.char.name"></textarea>
+
+                <label for="cBackground">Background</label>
+                <textarea type="text" id="cBackground" name="background" ng-model="cc.char.background"></textarea>
+
+                <label for="cPersonality">Personality</label>
+                <textarea type="text" id="cPersonality" name="personality" ng-model="cc.char.personality"></textarea>
+
+                <label for="cRelations">Relations</label>
+                <select id="cRelations" name="relations" ng-model="cc.char.relations">
+                    <option value="1235136DaF32">TenderHeart Bear</option>
+                    <option value="3246f23as">Optimus Prime</option>
+                    <option value="12a24231">ScoobyDoo</option>
+                </select>
+                <input type="submit" value="Submit" >
+            </form>
+            <p ng-bind="cc.tester"></p>
+            <table>
+                <tbody>
+                <tr>
+                    <th>#</th>
+                    <th>Image</th>
+                    <th>Artist Name</th>
+                    <th>Track Name</th>
+                    <th>Price</th>
+                </tr>
+                <tr ng-repeat="song in cc.data">
+                    <td>{{ $index + 1 }}</td>
+                    <td><img ng-src="{{ song.artworkUrl60 }}"></td>
+                    <td>{{ song.artistName }}:</td>
+                    <td>{{ song.trackName }}</td>
+                    <td>{{ song.trackPrice }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    angular.module("fakeApp", [])
+            .service("characterService", function ($http) {
+                this.test = "testing yo";
+                var service = {};
+                var baseUrl = "https://itunes.apple.com/search?term=";
+                var url = '';
+                var char = '';
+                var makeUrl = function(){
+                    url = baseUrl + char + "&callback=JSON_CALLBACK"
+                };
+                this.setInfo = function(s){
+                    char = s;
+                };
+                this.callItunes = function(d){
+                    makeUrl();
+                    console.log(url);
+
+                    return $http({method:'jsonp',url:url, cache:false})
+                            .then(function(response){
+                                return response.data;
+                            }, function(error){
+                                return error;
+                            });
+                }
+            })
+
+            .controller("characterController", function (characterService) {
+                this.tester = characterService.test;
+                this.char = {};
+                this.logIt = function(){
+                    console.log(this.char);
+                    this.char = {};
+                };
+                this.data = {};
+                this.results = characterService.results;
+                self = this;
+
+                this.sendCharInfo = function(){
+                    characterService.setInfo(this.char);
+                };
+
+                this.sendCharacter = function(){
+                    this.sendCharInfo();
+                    characterService.callItunes()
+                            .then(function(data){
+                                self.data = data.results;
+                            }, function(data){
+                                alert(data);
+                            });
+                };
+            })
+
+</script>
+</html>
