@@ -10,13 +10,25 @@
     $user_id = [
         ['id'=> 1, 'userID' => 'bulbasaur', 'password' => 'venasaur' ]
     ];
-    $username = $_POST['name'];
+    $username = $_POST['user_name'];
     $password = $_POST['password'];
-
+    $userAuthentication = false;
     foreach($user_id as $user){
-        if($username === $user['id']){
-            
+        if($username === $user['userID'] && $password === $user['password']){
+            //echo 'username and password match!';
+            $userAuthentication = true;
+            $_SESSION['user'] = $username;
+            $output = [
+                'success' => true
+            ];
+            break;
         }
     }
-
+    if(!$userAuthentication){
+        $output = [
+            'success' => false
+        ];
+    }
+    $output_string = json_encode($output);
+    print $output_string; //{"success":true}
 ?>

@@ -13,7 +13,7 @@
             };
             console.log('username: ', name, ', password: ', key);
             $.ajax({
-                url: 'login_handler.php',
+                url: 'userHandler.php',
                 data: userInformation,
                 cache: false,
                 method: 'POST',
