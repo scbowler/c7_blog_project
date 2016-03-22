@@ -9,11 +9,20 @@
     //call query from mySQL server.
     require('MySQL_connect.php');
     $query = "SELECT * FROM `users`";
-    $mysqliQuery = mysqli_query($connect, $query);
-    print_r($mysqliQuery);
-    $user_id = [
-        ['id'=> 1, 'userID' => 'bulbasaur', 'password' => 'venasaur' ]
+    $result = mysqli_query($connect, $query);
+    while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+        $userInformation[] = $row;
+    }
+    print_r($userInformation);
+
+    //print_r($mysqliQuery);
+    /*$user_id = [
+        ['id'=> 1, 'userID' => 'bulbasaur', 'password' => 'venasaur' ],
+        ['id'=> 4, 'userID' => 'charmander', 'password' => 'charizard' ]
     ];
+    echo '<br><br>';
+    print_r($user_id);*/
+
     $username = $_POST['user_name'];
     $password = $_POST['password'];
     $userAuthentication = false;
