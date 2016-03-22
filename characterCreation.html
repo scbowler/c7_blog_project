@@ -60,43 +60,6 @@
         }
 
 
-        .spinner {
-            display: inline-block;
-            opacity: 0;
-            width: 0;
-
-            -webkit-transition: opacity 0.25s, width 0.25s;
-            -moz-transition: opacity 0.25s, width 0.25s;
-            -o-transition: opacity 0.25s, width 0.25s;
-            transition: opacity 0.25s, width 0.25s;
-        }
-
-        .has-spinner.active {
-            cursor:progress;
-        }
-
-        .has-spinner.active .spinner {
-            opacity: 1;
-            width: auto; /* This doesn't work, just fix for unkown width elements */
-        }
-
-        .has-spinner.btn-mini.active .spinner {
-            width: 10px;
-        }
-
-        .has-spinner.btn-small.active .spinner {
-            width: 13px;
-        }
-
-        .has-spinner.btn.active .spinner {
-            width: 16px;
-        }
-
-        .has-spinner.btn-large.active .spinner {
-            width: 19px;
-        }
-
-
     </style>
     <link rel="stylesheet" text="text/css" href="style.css">
 
@@ -132,10 +95,10 @@
             <div>
                 <form  ng-submit="cc.sendCharacter()">
                     <label for="cName">Name</label>
-                    <input type="text" id="cName" name="name" ng-model="cc.char.cName">
+                    <input type="text" id="cName" name="name" ng-model="cc.char.name">
 
                     <label for="cApperance">Physical Appearance</label>
-                    <textarea type="text" id="cApperance" name="apperance" ng-model="cc.char.name"></textarea>
+                    <textarea type="text" id="cApperance" name="apperance" ng-model="cc.char.appearance"></textarea>
 
                     <label for="cBackground">Background</label>
                     <textarea type="text" id="cBackground" name="background" ng-model="cc.char.background"></textarea>
@@ -154,12 +117,6 @@
                 </form>
                 <!--testing $HTML-->
                 <p ng-bind="cc.tester"></p>
-                <p class="active">
-                    <button class="btn btn-success has-spinner" ng-click="toggleSpin()">
-                        <span class="spinner"><i class="icon-spin icon-refresh"></i></span>
-                        Foo
-                    </button>
-                </p>
                 <table>
                     <tbody>
                     <tr>
@@ -225,10 +182,9 @@
                 };
                 this.data = {};
                 this.results = characterService.results;
-                self = this;
 
                 this.sendCharInfo = function(){
-                    characterService.setInfo(this.char);
+                    characterService.setInfo(this.char.name);
                 };
                 this.toggleSpin = function(){
                     console.log("spinning");
