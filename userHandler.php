@@ -19,13 +19,12 @@
     $userAuthentication = false;
     foreach($userInformation as $user){
         if($username === $user['username'] && $password === $user['password']){
-            //echo 'username and password match!';
             $userAuthentication = true;
             $_SESSION['user'] = $username;
             $output = [
                 'success' => true
             ];
-            break;
+            break; //break to stop searching through forloop once found
         }
     }
     if(!$userAuthentication){
@@ -34,6 +33,5 @@
         ];
     }
     $output_string = json_encode($output);
-    //print_r($userInformation);
     print $output_string; //{"success":true}
 ?>
