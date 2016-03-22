@@ -23,8 +23,8 @@
                     success: function(response){
                         console.log('AJAX call success! ', response);
                         if(response.success){
-                            var message = $('<p>').text('Signup is successful!');
-                            $('#message').empty().append(message);
+                            //var message = $('<p>').text('Signup is successful!');
+                            //$('#message').empty().append(message);
                         }else{
                             var message = $('<p>').text('Signup is unsuccessful please try again!');
                             $('#message').empty().append(message);
@@ -35,7 +35,8 @@
                     }
                 });
             } else {
-                //here I will output password does not match!
+                var message = $('<p>').text('Password does not match. Please try again');
+                $('#message').empty().append(message);
             }
         }
         $(document).ready(function(){
