@@ -7,6 +7,10 @@
  */
     session_start();
     //call query from mySQL server.
+    require('MySQL_connect.php');
+    $query = "SELECT * FROM `users`";
+    $mysqliQuery = mysqli_query($connect, $query);
+    print_r($mysqliQuery);
     $user_id = [
         ['id'=> 1, 'userID' => 'bulbasaur', 'password' => 'venasaur' ]
     ];
