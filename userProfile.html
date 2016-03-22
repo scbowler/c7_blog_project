@@ -93,41 +93,48 @@
         <div id="characterForm" ng-app="fakeApp" ng-controller="userProfileController as uc">
             <button ng-click="uc.sendCharacter()">Load a Dummy</button>
             <h3>{{uc.userData.name}}'s Account</h3>
-            <div>
-                <form>
-                    <label for="userName">Name</label>
-                    <input type="text" id="userName" name="name" ng-model="uc.userData.name">
+            <table class="table table-condensed">
+                Maybe put stories links here
+                <tbody>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                </tr>
+                <tr>
+                    <td>{{uc.userData.id}}</td>
+                    <td>{{uc.userData.course}}:</td>
+                    <td>{{uc.userData.grade}}</td>
+                    <td>{{uc.userData.course}}</td>
+                </tr>
+                </tbody>
+            </table>
 
-                    <label for="userEmail">Email</label>
-                    <input type="text" id="userEmail" name="name" ng-model="uc.userData.course">
 
-                    <label for="userPassword">Password</label>
-                    <input type="password" id="userPassword" name="name" ng-model="uc.userData.course">
 
-                    <input type="submit" ng-value="cc.submitLoad()" >
-                </form>
 
                 <!--testing $HTML-->
-                <!--<p ng-bind="uc.tester"></p>-->
-                <!--<table>-->
-                    <!--Maybe put stories links here-->
-                    <!--<tbody>-->
-                    <!--<tr>-->
-                        <!--<th>#</th>-->
-                        <!--&lt;!&ndash;<th>image</th>&ndash;&gt;-->
-                        <!--<th>grade</th>-->
-                        <!--<th>id</th>-->
-                        <!--<th>course</th>-->
-                    <!--</tr>-->
-                    <!--<tr ng-repeat="stuff in uc.allData">-->
-                        <!--<td>{{ $index + 1 }}</td>-->
-                        <!--&lt;!&ndash;<td><img ng-src="{{ song.artworkUrl60 }}"></td>&ndash;&gt;-->
-                        <!--<td>{{ stuff.grade }}:</td>-->
-                        <!--<td>{{ stuff.id }}</td>-->
-                        <!--<td>{{ stuff.course }}</td>-->
-                    <!--</tr>-->
-                    <!--</tbody>-->
-                <!--</table>-->
+                <p ng-bind="uc.tester"></p>
+                <table class="table table-condensed">
+                    Maybe put stories links here
+                    <tbody>
+                    <tr>
+                        <th>#</th>
+                        <!--<th>image</th>-->
+                        <th>grade</th>
+                        <th>id</th>
+                        <th>course</th>
+                    </tr>
+                    <tr ng-repeat="stuff in uc.allData">
+                        <td>{{ $index + 1 }}</td>
+                        <!--<td><img ng-src="{{ song.artworkUrl60 }}"></td>-->
+                        <td>{{ stuff.grade }}:</td>
+                        <td>{{ stuff.id }}</td>
+                        <td>{{ stuff.course }}</td>
+                    </tr>
+                    </tbody>
+                </table>
                 <!--end Test-->
             </div>
         </div>
@@ -140,12 +147,13 @@
 <script>
     angular.module("fakeApp", [])
             .service("userProfileService", function ($http) {
+                var userProfileScope = this;
                 this.test = "testing yo";
-                var service = {};
                 var baseUrl = "http://s-apis.learningfuze.com/sgt/get";
                 var url = '';
                 var char = '';
                 this.userData = {};
+                this.allData = {};
 
                 var makeUrl = function(){
                     url = baseUrl + char + "&callback=JSON_CALLBACK"
@@ -157,7 +165,6 @@
 
                 this.loadUserData = function(){
                     makeUrl();
-                    //console.log(url);
 
                     var dataString = $.param({api_key: "L91wptvUmZ"});
 
@@ -168,7 +175,11 @@
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                     })
                             .then(function (response) {
-                                        return response.data;
+
+                                        userProfileScope.allData = response.data.data;
+
+                                        var rand = Math.floor(Math.random()* response.data.data.length);
+                                        userProfileScope.userData = response.data.data[rand];
                                     },
                                     function (error) {
                                         return error;
@@ -179,8 +190,8 @@
             .controller("userProfileController", function (userProfileService, $log) {
                 this.tester = userProfileService.test;
                 var userProfileScope = this;
-                this.userData = {};
-                this.allData = {};
+                this.userData = userProfileService.userData;
+                this.allData = userProfileService.allData;
                 this.loading = "Load";
 
                 this.results = userProfileService.results;
@@ -192,23 +203,15 @@
                 this.submitLoad = function(){
                     return this.loading;
                 };
-
                 this.sendCharacter = function(){
-                    this.loading = "Finished";
-                    //this.sendCharInfo();
                     userProfileService.loadUserData()
-                            .then(function(data){
-                                userProfileScope.loading = "Hold On"
-                                //console.log(data.data[0]);
-                                userProfileScope.allData = data.data;
-                                var rand = Math.floor(Math.random()* data.data.length);
-                                userProfileScope.userData = data.data[rand];
-                                userProfileScope.loading = "Load";
-
-                            }, function(data){
-                                $log.warn(data);
-                                userProfileScope.loading = "Load";
+                            .then(function(response){
+                        userProfileScope.userData = userProfileService.userData;
+                        userProfileScope.allData = userProfileService.allData;
+                    },function(error){
+                                $log.warn(error);
                             });
+
                 };
             })
 
