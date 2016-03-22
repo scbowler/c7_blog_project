@@ -8,7 +8,8 @@
     session_start();
     //call query from mySQL server.
     require('MySQL_connect.php');
-    $query = "SELECT * FROM `users` WHERE 1";
+    $query = "SELECT `username`, `password` FROM `users` WHERE `active` = 1";
+    //$query = "SELECT * FROM `users` WHERE 1";
     $result = mysqli_query($connect, $query);
     while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
         $userInformation[] = $row;
