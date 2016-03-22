@@ -1,29 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- JQUERY -->
-    <script   src="https://code.jquery.com/jquery-2.2.1.min.js"   integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="   crossorigin="anonymous"></script>
-    <!-- BOOTSTRAP -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Story Press</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+
     <!-- STYLE -->
-    <link rel="stylesheet" type="text/css" href="storyWrite.css">
+    <link rel="stylesheet" type="text/css" href="promptWrite.css">
 </head>
 <body>
-<form action="TARGET_PHP_GOES_HERE">
-    <div>
-        <p>Genre</p>
-        <input type="text" placeholder="Write your story prompt here!">
+<body>
+<header>
+    <div id="title">
+        <!--temp title or maybe not-->
+        <h1>Story Press</h1>
+        <!--come up with better tag line-->
+        <span>Come up with a prompt, or write a story based on one!</span>
     </div>
-    <div>
-        <p>Setting</p>
-        <input type="text" placeholder="Write your story prompt here!">
-    </div>
-    <div>
-        <p>Prompt</p>
+</header>
+<div class="main-container">
+    <nav class="sidebar">
+        <div>
+            <span>fontawesome icon here</span>
+            <span>username</span>
+        </div>
+        <ul>
+            <li>Browse Stories/Prompts</li>
+            <li>My Stories</li>
+            <li>My Prompts</li>
+            <li>Account Settings</li>
+        </ul>
+    </nav>
+
+    <div class="main-body">
+        <form action="TARGET_PHP_GOES_HERE">
+            <div>
+                <p>Genre</p>
+                <input type="text" placeholder="Write your story prompt here!">
+            </div>
+            <div>
+                <p>Setting</p>
+                <input type="text" placeholder="Write your story prompt here!">
+            </div>
+            <div>
+                <p>Prompt</p>
         <textarea placeholder="Write your story prompt here!">
         </textarea>
+            </div>
+            <input type="submit">
+        </form>
     </div>
-    <input type="submit">
-</form>
+</div>
+
+<footer>Footer stuff</footer>
 </body>
 </html>
