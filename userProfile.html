@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Story Press</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            box-sizing: border-box;
+        }
+
+        input[type=text], input[type=password], select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 12px 20px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+            resize: none;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #4ed1ff;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #2efaff;
+        }
+
+
+    </style>
+    <link rel="stylesheet" text="text/css" href="style.css">
+
+</head>
+<body>
+<header>
+    <div id="title">
+        <!--temp title or maybe not-->
+        <h1>Story Press</h1>
+        <!--come up with better tag line-->
+        <span>Come up with a prompt, or write a story based on one!</span>
+    </div>
+</header>
+
+<div class="main-container">
+    <nav class="sidebar">
+        <div>
+            <span>fontawesome icon here</span>
+            <span>username</span>
+        </div>
+        <ul>
+            <li>Browse Stories/Prompts</li>
+            <li>My Stories</li>
+            <li>My Prompts</li>
+            <li>Account Settings</li>
+        </ul>
+    </nav>
+
+    <div class="main-body">
+
+        <div id="characterForm" ng-app="fakeApp" ng-controller="userProfileController as uc">
+            <button ng-click="uc.sendCharacter()">Load a Dummy</button>
+            <h3>{{uc.userData.name}}'s Account</h3>
+            <div>
+                <form>
+                    <label for="userName">Name</label>
+                    <input type="text" id="userName" name="name" ng-model="uc.userData.name">
+
+                    <label for="userEmail">Email</label>
+                    <input type="text" id="userEmail" name="name" ng-model="uc.userData.course">
+
+                    <label for="userPassword">Password</label>
+                    <input type="password" id="userPassword" name="name" ng-model="uc.userData.course">
+
+                    <input type="submit" ng-value="cc.submitLoad()" >
+                </form>
+
+                <!--testing $HTML-->
+                <!--<p ng-bind="uc.tester"></p>-->
+                <!--<table>-->
+                    <!--Maybe put stories links here-->
+                    <!--<tbody>-->
+                    <!--<tr>-->
+                        <!--<th>#</th>-->
+                        <!--&lt;!&ndash;<th>image</th>&ndash;&gt;-->
+                        <!--<th>grade</th>-->
+                        <!--<th>id</th>-->
+                        <!--<th>course</th>-->
+                    <!--</tr>-->
+                    <!--<tr ng-repeat="stuff in uc.allData">-->
+                        <!--<td>{{ $index + 1 }}</td>-->
+                        <!--&lt;!&ndash;<td><img ng-src="{{ song.artworkUrl60 }}"></td>&ndash;&gt;-->
+                        <!--<td>{{ stuff.grade }}:</td>-->
+                        <!--<td>{{ stuff.id }}</td>-->
+                        <!--<td>{{ stuff.course }}</td>-->
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+                <!--end Test-->
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer>Footer stuff</footer>
+</body>
+<script>
+    angular.module("fakeApp", [])
+            .service("userProfileService", function ($http) {
+                this.test = "testing yo";
+                var service = {};
+                var baseUrl = "http://s-apis.learningfuze.com/sgt/get";
+                var url = '';
+                var char = '';
+                this.userData = {};
+
+                var makeUrl = function(){
+                    url = baseUrl + char + "&callback=JSON_CALLBACK"
+                };
+
+                this.setInfo = function(charObj){
+                    char = charObj;
+                };
+
+                this.loadUserData = function(){
+                    makeUrl();
+                    //console.log(url);
+
+                    var dataString = $.param({api_key: "L91wptvUmZ"});
+
+                    return $http({
+                        method: "POST",
+                        url: baseUrl,
+                        data: dataString,
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    })
+                            .then(function (response) {
+                                        return response.data;
+                                    },
+                                    function (error) {
+                                        return error;
+                                    });
+                }
+            })
+
+            .controller("userProfileController", function (userProfileService, $log) {
+                this.tester = userProfileService.test;
+                var userProfileScope = this;
+                this.userData = {};
+                this.allData = {};
+                this.loading = "Load";
+
+                this.results = userProfileService.results;
+
+                this.sendCharInfo = function(){
+                    userProfileService.setInfo(this.char.name);
+                };
+
+                this.submitLoad = function(){
+                    return this.loading;
+                };
+
+                this.sendCharacter = function(){
+                    this.loading = "Finished";
+                    //this.sendCharInfo();
+                    userProfileService.loadUserData()
+                            .then(function(data){
+                                userProfileScope.loading = "Hold On"
+                                //console.log(data.data[0]);
+                                userProfileScope.allData = data.data;
+                                var rand = Math.floor(Math.random()* data.data.length);
+                                userProfileScope.userData = data.data[rand];
+                                userProfileScope.loading = "Load";
+
+                            }, function(data){
+                                $log.warn(data);
+                                userProfileScope.loading = "Load";
+                            });
+                };
+            })
+
+</script>
+</html>
