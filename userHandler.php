@@ -8,8 +8,13 @@
     session_start();
     //call query from mySQL server.
     require('MySQL_connect.php');
-    $query = "SELECT * FROM `users` WHERE 1";
+    $username = $_POST['user_name'];
+    $password = $_POST['password'];
+
+    $query = "SELECT `username`, `password` FROM `users` WHERE `active` = 1";
+    //$query = "SELECT `username` FROM `users` WHERE `username` = {$username}, `password` = {$password}, `active` = 1";
     $result = mysqli_query($connect, $query);
+    
     while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
         $userInformation[] = $row;
     }
@@ -19,13 +24,12 @@
     $userAuthentication = false;
     foreach($userInformation as $user){
         if($username === $user['username'] && $password === $user['password']){
-            //echo 'username and password match!';
             $userAuthentication = true;
             $_SESSION['user'] = $username;
             $output = [
                 'success' => true
             ];
-            break;
+            break; //break to stop searching through forloop once found
         }
     }
     if(!$userAuthentication){
@@ -34,6 +38,5 @@
         ];
     }
     $output_string = json_encode($output);
-    //print_r($userInformation);
     print $output_string; //{"success":true}
 ?>
