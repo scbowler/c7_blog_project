@@ -18,7 +18,7 @@
 
     <script src="       "></script>
 
-    <link href='https://fonts.googleapis.com/css?family=Imprima|Quando' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Quando|Source+Sans+Pro:400,700,400italic' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" text="text/css" href="style.css">
 

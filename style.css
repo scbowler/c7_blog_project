@@ -2,6 +2,11 @@ html, body {
     height: 100%;
 }
 
+p {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #332d4e;
+}
+
 header {
     display: flex;
     align-items: center;
@@ -32,7 +37,7 @@ header {
 }
 
 #title .subtitle {
-    font-family: 'Imprima', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     line-height: 1.5em;
     display: inline-block;
     width: 150px;
@@ -77,6 +82,7 @@ header {
     border-radius: 7px;
     background-color: #fafbfc;
     box-shadow: 2px 2px #3fcce5;
+    z-index: 1;
 
 }
 
@@ -141,15 +147,35 @@ nav ul li {
     padding: 30px;
 }
 
+
+
+.prompt-container {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+    -webkit-column-gap: 2px;
+    -moz-column-gap: 2px;
+    column-gap: 2px;
+
+
+
+}
+
+
 .prompts {
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 5px;
+    border: 1px solid #3fcce5;
+    box-shadow: 2px 2px #3fcce5;
+    background-color: #fafbfc;
+    margin: 5px;
+    border-radius: 5px;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    display: inline-block;
+
 }
 
 .prompt-label {
-    font-size: 18px;
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .stories {
@@ -157,6 +183,8 @@ nav ul li {
     border-radius: 10px;
     padding: 5px;
 }
+
+
 
 h4 {
     font-weight: bold;
