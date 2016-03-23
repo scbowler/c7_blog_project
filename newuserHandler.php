@@ -12,15 +12,21 @@
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $query = "INSERT INTO `users` (`username`, `email`, `password`) VALUES ('$username', '$email', '$password')";
-    $result = mysqli_query($connect, $query);
-
-    $output = [
-        'success'=>true,
-        'results'=>$result
+    $regex = [
+        ['field'=>$username, 'regex'=>'/[a-zA-Z0-9]{3,16}/', 'error_message'=>'id must be a number between 2 and 5 digits long'],
+        ['field'=>$email, 'regex'=>'/^\S+@\S+$/', 'error_message'=>'The email must be in a valid format'],
+        ['field'=>$password, 'regex'=>'/[a-zA-Z0-9]{5,32}/', 'error_message'=>'name must be 3 letters or more']
     ];
-    $output_string = json_encode($output);
-    //print_r($_POST);
-    print($output_string);
-    //echo $query;
+    if(preg_match($regex[0]['regex'], $username) && preg_match($regex[1]['regex'], $password)) {
+        $query = "INSERT INTO `users` (`username`, `email`, `password`) VALUES ('$username', '$email', '$password')";
+        $result = mysqli_query($connect, $query);
+        $output = [
+            'success' => true,
+            'results' => $result
+        ];
+        $output_string = json_encode($output);
+        //print_r($_POST);
+        print($output_string);
+        //echo $query;
+    }
 ?>
