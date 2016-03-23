@@ -33,10 +33,11 @@ app.service('storyWriteService', function($http){
             url: 'get_prompts.php',
             method: 'post',
             cache: false,
-            data: {
+            headers : {'Content-Type': 'application/x-www-form-urlencoded'},
+            data: $.param({
                 mode: 'single',
                 prompt_id: promptID
-            }
+            })
         })
             .then(
                 function(response){
