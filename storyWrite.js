@@ -12,54 +12,41 @@ app.service('storyWriteService', function($http){
     this.getPrompt = function(promptID){
         console.log('Attempting to contact server');
 
-        $.ajax({
+        return $http({
             url: 'get_prompts.php',
             method: 'post',
             cache: false,
-            data: {
+            headers : {'Content-Type': 'application/x-www-form-urlencoded'},
+            data: $.param({
                 mode: 'single',
                 prompt_id: promptID
-            },
-            success: function(response) {
-                console.log('Success', response);
-                selfServ.dataServ = response.data;
-            },
-            error: function(response) {
-                console.log('Failure', response);
-            }
-        });
-
-        /*$http({
-            url: 'get_prompts.php',
-            method: 'post',
-            cache: false,
-            data: {
-                mode: 'single',
-                prompt_id: promptID
-            }
+            })
         })
             .then(
                 function(response){
                     console.log('Success', response);
-                    selfServ.dataServ = response.data;
+                    selfServ.dataServ = response.data.data[0];
+                    console.log(selfServ.dataServ);
                 },
-                function(response){
-                    console.log('Failure',response);
-                    selfServ.dataServ = response;
+                function(error){
+                    console.log('Failure',error);
+                    selfServ.dataServ = error;
                 }
-            );*/
+            );
     }
 });
 
 app.controller('storyWriteController', function(storyWriteService){
     var selfCont = this;
 
-    storyWriteService.getPrompt(4);
+    storyWriteService.getPrompt(2).then(
+        function () {
+            selfCont.prompt = storyWriteService.dataServ.description;
+            selfCont.genre = storyWriteService.dataServ.genre;
+            selfCont.setting = storyWriteService.dataServ.setting;
+            selfCont.poster = storyWriteService.dataServ.user_id;
+            selfCont.postDate = storyWriteService.dataServ.created;
+        });
 
-    this.prompt = storyWriteService.dataServ.description;
-    this.genre = storyWriteService.dataServ.genre;
-    this.setting = storyWriteService.dataServ.setting;
-    this.poster = storyWriteService.dataServ.user_id;
-    this.postDate = storyWriteService.dataServ.created;
 });
 
