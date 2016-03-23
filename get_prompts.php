@@ -6,6 +6,9 @@
             case 'all':
                 $mode = 'all';
                 break;
+            case 'user':
+                $mode = 'user';
+                break;
             case 'single':
                 $mode = 'single';
                 break;
@@ -34,6 +37,12 @@
             }
             $offset = ($page - 1) * $perPage;
             $query = "SELECT ID, title, description, category, genre, setting, user_id, created FROM prompts WHERE active=1 LIMIT $perPage OFFSET $offset";
+            break;
+        case 'user':
+            if (!empty($_POST['user_id'])) {
+                $userId = $_POST['user_id'];
+                $query = "SELECT ID, title, description, category, genre, setting, created FROM prompts WHERE active=1 AND user_id=$userId";
+            }
             break;
         case 'single':
             $promptId = intval($_POST['prompt_id']);
