@@ -122,16 +122,16 @@
                     <tr>
                         <th>#</th>
                         <th>Image</th>
-                        <th>Artist Name</th>
-                        <th>Track Name</th>
-                        <th>Price</th>
+                        <th>category</th>
+                        <th>genre</th>
+                        <th>description</th>
                     </tr>
                     <tr ng-repeat="song in cc.data">
                         <td>{{ $index + 1 }}</td>
                         <td><img ng-src="{{ song.artworkUrl60 }}"></td>
-                        <td>{{ song.artistName }}:</td>
-                        <td>{{ song.trackName }}</td>
-                        <td>{{ song.trackPrice }}</td>
+                        <td>{{ song.category }}:</td>
+                        <td>{{ song.genre }}</td>
+                        <td>{{ song.description }}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -145,15 +145,16 @@
 <footer>Footer stuff</footer>
 </body>
 <script>
+
     angular.module("fakeApp", [])
             .service("characterService", function ($http) {
                 this.test = "testing yo";
                 var service = {};
-                var baseUrl = "https://itunes.apple.com/search?term=";
+                var baseUrl = "get_prompts.php";
                 var url = '';
                 var char = '';
                 var makeUrl = function(){
-                    url = baseUrl + char + "&callback=JSON_CALLBACK"
+                    url = baseUrl// + char + "&callback=JSON_CALLBACK"
                 };
                 this.setInfo = function(charObj){
                     char = charObj;
@@ -162,12 +163,31 @@
                     makeUrl();
                     console.log(url);
 
-                    return $http({method:'jsonp',url:url, cache:false})
+                    return $http({
+                                method:'POST',
+                                url: baseUrl,
+                                data: {mode:'user', id:7},
+                                dataType: "json"
+                            })
                             .then(function(response){
-                                return response.data;
+                                return response;
                             }, function(error){
                                 return error;
                             });
+                };
+
+                this.getData = function(){
+                    return $.ajax({
+                        url: 'get_prompts.php',
+                        method: 'POST',
+                        data: {mode:'all', page:1, per_page:2},
+                        //   data: {mode:'user', id:7},
+                        dataType: 'json',
+                        success: function(response){
+                            console.log(response);
+                            return response;
+                        }
+                    });
                 }
             })
 
@@ -178,7 +198,6 @@
                 this.loading = "Submit";
                 this.logIt = function(){
                     console.log(this.char);
-
                 };
 
                 this.data = {};
@@ -195,16 +214,17 @@
                 this.sendCharacter = function(){
                     this.loading = "Loading";
                     this.sendCharInfo();
-                    characterService.createCharacter()
-                            .then(function(data){
-                                console.log(data);
-                                characterScope.data = data.results;
-                                characterScope.loading = "Submit";
-                                characterScope.char = {};
+                    characterService.getData()
+                            .then(function(response){
+                                console.log(response.data);
+                                characterScope.data =  response.data;
+//                                characterScope.data = response.data.data;
+//                                characterScope.loading = "Submit";
+//                                characterScope.char = {};
 
                             }, function(data){
                                 $log.warn(data);
-                                characterScope.loading = "Submit";
+//                                characterScope.loading = "Submit";
                             });
                 };
             })
