@@ -1,17 +1,21 @@
 <?php
-    switch($_POST['mode']) {
-        case 'all':
-            $mode = 'all';
-            break;
-        case 'single':
-            $mode = 'single';
-            break;
-        default:
-            if (!empty($_POST['story_id'])) {
-                $mode = 'single';
-            } else {
+    if (empty($_POST['mode'])) {
+        $mode = 'all';
+    } else {
+        switch ($_POST['mode']) {
+            case 'all':
                 $mode = 'all';
-            }
+                break;
+            case 'single':
+                $mode = 'single';
+                break;
+            default:
+                if (!empty($_POST['story_id'])) {
+                    $mode = 'single';
+                } else {
+                    $mode = 'all';
+                }
+        }
     }
 
     require('MySQL_connect.php');
@@ -48,5 +52,6 @@
         $output['error_msg'] = 'empty data set';
         $output['success'] = false;
     }
+    mysqli_close($connect);
     echo json_encode($output);
 ?>
