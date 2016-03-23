@@ -26,7 +26,7 @@
 <body>
 
 <header>
-    <div class="header-container">
+    <div class="container header-container">
         <div id="title">
             <!--temp title or maybe no-->
             <img src="images/storypresslogo.png" src="logo">

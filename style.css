@@ -17,19 +17,22 @@ header {
 }
 
 .header-container {
-    width: 90%;
-    margin: auto;
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+
+}
+
+.container {
+    padding: 0;
 }
 
 #title {
 
     height: 95%;
     display: flex;
-    align-items: center;
 
+    align-items: center;
 }
 
 #title img {
@@ -50,7 +53,10 @@ header {
 
 .user-menu {
     font-family: 'Quando', serif;
-    position: relative;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .user-menu-name {
@@ -120,34 +126,38 @@ header {
 
 .main-container {
     min-height: 69vh;
-    display: flex;
-    flex-direction: row;
+    padding: 10px 0;
     background-color: #f1f4f7;
 }
 
-nav {
-    width: 15vw;
-    background-color: #ced3d7;
+
+h2 {
+    font-family: 'Quando', serif;
+    color: #f95858;
+    text-align: center;
+    margin: 30px 0;
 
 }
 
-nav ul {
-    list-style: none;
-    padding: 0 10px;
-}
-
-nav ul li {
-    margin: 1px;
-    padding: 7px;
+#browse-nav {
+    text-align: center;
+    margin: 20px 0;
 
 }
 
-.main-body {
-    width: 85vw;
-    padding: 30px;
+#browse-nav a {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #dbe0e4;
+    margin: 0 20px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 700;
+    font-size: 1.25em;
+
 }
 
-
+#browse-nav a:hover {
+    text-decoration: none;
+}
 
 .prompt-container {
     -webkit-column-count: 3;
@@ -156,9 +166,7 @@ nav ul li {
     -webkit-column-gap: 2px;
     -moz-column-gap: 2px;
     column-gap: 2px;
-
-
-
+    padding-top: 20px;
 }
 
 
@@ -174,8 +182,35 @@ nav ul li {
 
 }
 
+.prompts h4 {
+    font-family: 'Quando', serif;
+    padding-bottom: 5px;
+    text-align: center;
+    color: #f95858;
+    border-bottom: 1px solid #dbe0e4;
+}
+
+.prompts a {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 700;
+    background-color: #3fcce5;
+    color: #fafbfc;
+    padding: 10px;
+    margin: 5px .5% 0;
+    border-radius: 5px;
+    display: inline-block;
+    width: 48%;
+    text-align: center;
+}
+
+.prompts a:hover {
+    text-decoration: none;
+    background-color: #f95858;
+}
+
 .prompt-label {
     font-weight: 700;
+    color: #585177;
 }
 
 .stories {
