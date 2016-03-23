@@ -1,4 +1,3 @@
-
     angular.module("storyPress")
 
         .service("characterService", function ($http) {
@@ -77,16 +76,42 @@
                         function (error) {
                             console.log(error);
                         });
+            };
+            this.createUser = function(name, emailAddress, key, confirm){
+
+                var dataString = $.param({
+                    user_name: name,
+                    email: emailAddress,
+                    password: key,
+                    passwordConfirm: confirm
+                });
+
+                return $http({
+                    method: "POST",
+                    url: 'newuserHandler.php',
+                    data: dataString,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    cache: false,
+                    dataType: "json"
+                })
+                    .then(function (response) {
+                            console.log(response);
+                            userProfileScope.userData.name = name;
+                            userProfileScope.loggedIn = true;
+                        },
+                        function (error) {
+                            console.log(error);
+                        });
             }
         })
 
         .controller("userProfileController", function (userProfileService, $log) {
             this.tester = userProfileService.test;
             var userProfileScope = this;
-            this.loggedIn = false;
+            this.loggedIn = userProfileService.loggedIn;
             this.userData = userProfileService.userData;
             this.allData = userProfileService.allData;
-            this.loading = userProfileService.loggedIn;
+            this.loading = "";
 
             this.results = userProfileService.results;
 
@@ -110,10 +135,26 @@
                         userProfileScope.loggedIn = true;
                     },function(error){
                         $log.warn(error);
+                        userProfileScope.loggedIn = false;
                     });
             };
-        })
 
+            this.signUp = function(){
+                var userName =  $('#name').val();
+                var email = $('#email').val();
+                var password = $('#password').val();
+                var passwordConfirm = $('#confirm_password').val();
+                userProfileService.createUser(userName, email, password, passwordConfirm)
+                    .then(function(response){
+                        userProfileScope.userData = userProfileService.userData;
+                        console.log("login success");
+                        userProfileScope.loggedIn = true;
+                    }, function(error){
+                       $log.warn(error);
+                        userProfileScope.loggedIn = false;
+                    });
+            }
+        })
 
         .controller("characterController", function (characterService, $log, $scope) {
             this.tester = characterService.test;

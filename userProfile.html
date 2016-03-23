@@ -4,11 +4,9 @@
 
 
     <div class="main-body">
-
+<!--Login Form-->
         <div ng-hide="uc.loggedIn" id="loginForm">
-            <p>test</p>
             <form>
-
                 <input type="text" placeholder="name" class="success" id="name">
                 <input type="text" placeholder="password" id="password">
                 <input type="button" id="button" value="Log In" ng-click="uc.loginUser()">
@@ -16,6 +14,7 @@
             </form>
         </div>
 
+<!--Account Setting Form-->
         <div ng-show="uc.loggedIn" id="userSettings">
             <button ng-click="uc.sendCharacter()">Load a Dummy</button>
             <h1>{{uc.userData.name}}'s Account</h1>
@@ -38,7 +37,6 @@
                 </tr>
                 </tbody>
             </table>
-
 
             </div>
         </div>

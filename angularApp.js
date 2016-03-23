@@ -16,9 +16,9 @@
                     controllerAs: 'uc'
                 })
                 .when('/create', {
-                    templateUrl: 'userCreate.html',
-                    controller: 'newUserCtrl',
-                    controllerAs: 'nuc'
+                    templateUrl: 'newUser.html',
+                    controller: 'userProfileController',
+                    controllerAs: 'uc'
                 })
                 .when('/character',{
                     templateUrl: 'characterCreation.html',
@@ -34,5 +34,4 @@
                     redirectTo: '/index'
                 })
         })
-
 
