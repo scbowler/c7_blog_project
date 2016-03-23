@@ -88,9 +88,9 @@
         </ul>
     </nav>
 
-    <div class="main-body">
+    <div class="main-body" >
 
-        <div id="characterForm" ng-app="fakeApp" ng-controller="characterController as cc">
+        <div id="characterForm" ng-app="fakeApp" ng-controller="characterController as cc" ng-init="cc.getData()">
             <h3>Create New Character</h3>
             <div>
                 <form  ng-submit="cc.sendCharacter()">
@@ -115,6 +115,11 @@
 
                     <input type="submit" ng-value="cc.submitLoad()" >
                 </form>
+
+                <input id="next" type="button" value="Next" ng-click="cc.nextPrevPage('forward')"/>
+                <input id="prev" type="button" value="Previous" ng-click="cc.nextPrevPage('backward')"/>
+                <div id="displayResults" name="displayResults"></div>
+
                 <!--testing $HTML-->
                 <p ng-bind="cc.tester"></p>
                 <table>
@@ -126,7 +131,7 @@
                         <th>genre</th>
                         <th>description</th>
                     </tr>
-                    <tr ng-repeat="song in cc.data">
+                    <tr onload="getData()" ng-repeat="song in cc.data">
                         <td>{{ $index + 1 }}</td>
                         <td><img ng-src="{{ song.artworkUrl60 }}"></td>
                         <td>{{ song.category }}:</td>
@@ -176,22 +181,36 @@
                             });
                 };
 
+                this.currentPage = 1;
+                var self = this;
                 this.getData = function(){
-                    return $.ajax({
+                  //  $('input').attr('disabled','disabled'); //disable buttons
+
+                  return $.ajax({
                         url: 'get_prompts.php',
                         method: 'POST',
-                        data: {mode:'all', page:1, per_page:2},
+                        data: {mode:'all', page:self.currentPage, per_page:2},
                         //   data: {mode:'user', id:7},
                         dataType: 'json',
                         success: function(response){
-                            console.log(response);
+                           // $('input').attr('disabled',''); //re-enable buttons
+                           //$('#displayResults').text(response); //Update Div
+                            console.log("current", self.currentPage);
                             return response;
                         }
                     });
+                };
+                this.currentSet = function(direction) {
+                    if ("forward" == direction) {
+                        self.currentPage += 1;
+                    }
+                    else if ("backward" == direction) {
+                        self.currentPage -= 1;
+                    }
                 }
             })
 
-            .controller("characterController", function (characterService, $log) {
+            .controller("characterController", function (characterService, $log, $scope) {
                 this.tester = characterService.test;
                 characterScope = this;
                 this.char = {};
@@ -208,6 +227,7 @@
                 };
 
                 this.submitLoad = function(){
+
                     return this.loading;
                 };
 
@@ -218,15 +238,32 @@
                             .then(function(response){
                                 console.log(response.data);
                                 characterScope.data =  response.data;
-//                                characterScope.data = response.data.data;
-//                                characterScope.loading = "Submit";
-//                                characterScope.char = {};
-
+                                characterScope.loading = "Submit";
+                                characterScope.char = {};
+                                $scope.$digest();
                             }, function(data){
                                 $log.warn(data);
-//                                characterScope.loading = "Submit";
+                                characterScope.loading = "Submit";
                             });
+
                 };
+
+                this.nextPrevPage = (function(check){
+                    console.log("this", this);
+                    console.log("check current", characterService.currentPage);
+                    characterService.currentSet(check);
+
+                    if (characterService.currentPage==0) //Check for min
+                        characterService.currentPage=1;
+                    else if (characterService.currentPage==11) //Check for max
+                        characterService.currentPage=10;
+                    else
+                        characterService.getData()
+                                .then (function (response){
+                                    characterScope.data =  response.data;
+                                    $scope.$digest();
+                        });
+                });
             })
 
 </script>
