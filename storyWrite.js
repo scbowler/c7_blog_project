@@ -12,7 +12,7 @@ app.service('storyWriteService', function($http){
     this.getPrompt = function(promptID){
         console.log('Attempting to contact server');
 
-        $.ajax({
+        /*$.ajax({
             url: 'get_prompts.php',
             method: 'post',
             cache: false,
@@ -27,9 +27,9 @@ app.service('storyWriteService', function($http){
             error: function(response) {
                 console.log('Failure', response);
             }
-        });
+        });*/
 
-        /*$http({
+        $http({
             url: 'get_prompts.php',
             method: 'post',
             cache: false,
@@ -47,7 +47,7 @@ app.service('storyWriteService', function($http){
                     console.log('Failure',response);
                     selfServ.dataServ = response;
                 }
-            );*/
+            );
     }
 });
 
