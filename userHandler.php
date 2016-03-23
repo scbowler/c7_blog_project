@@ -10,11 +10,11 @@
     require('MySQL_connect.php');
     $username = $_POST['user_name'];
     $password = $_POST['password'];
-
+ 
     $query = "SELECT `username`, `password` FROM `users` WHERE `active` = 1";
     //$query = "SELECT `username` FROM `users` WHERE `username` = {$username}, `password` = {$password}, `active` = 1";
     $result = mysqli_query($connect, $query);
-    
+
     while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
         $userInformation[] = $row;
     }
@@ -34,7 +34,8 @@
     }
     if(!$userAuthentication){
         $output = [
-            'success' => false
+            'success' => false,
+            'message' => 'The username does not exist or password is incorrect.'
         ];
     }
     mysqli_close($connect);
