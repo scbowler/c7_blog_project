@@ -164,17 +164,12 @@
             this.data = {};
             this.results = characterService.results;
 
-            this.sendCharInfo = function () {
-                characterService.setInfo(this.char.name);
-            };
-
             this.submitLoad = function () {
                 return this.loading;
             };
 
             this.sendCharacter = function () {
                 this.loading = "Loading";
-                this.sendCharInfo();
                 characterService.getData()
                     .then(function (response) {
                         console.log(response.data);
