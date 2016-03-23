@@ -46,21 +46,21 @@
     </nav>
 
     <div class="main-body" ng-controller="promptWriteController as pwc" init>
-        <form action="TARGET_PHP_GOES_HERE">
+        <form>
             <div>
                 <p>Genre</p>
-                <input type="text" placeholder="Write your story prompt here!" ng-model="pwc.genre">
+                <input type="text" placeholder="Write your genre here!" ng-model="pwc.genre">
             </div>
             <div>
                 <p>Setting</p>
-                <input type="text" placeholder="Write your story prompt here!" ng-model="pwc.setting">
+                <input type="text" placeholder="Write your setting here!" ng-model="pwc.setting">
             </div>
             <div>
                 <p>Prompt</p>
                 <textarea placeholder="Write your story prompt here!" ng-model="pwc.prompt">
                 </textarea>
             </div>
-            <input type="submit">
+            <input type="submit" ng-click="">
         </form>
     </div>
 </div>

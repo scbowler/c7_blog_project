@@ -12,23 +12,6 @@ app.service('storyWriteService', function($http){
     this.getPrompt = function(promptID){
         console.log('Attempting to contact server');
 
-        /*$.ajax({
-            url: 'get_prompts.php',
-            method: 'post',
-            cache: false,
-            data: {
-                mode: 'single',
-                prompt_id: promptID
-            },
-            success: function(response) {
-                console.log('Success', response);
-                selfServ.dataServ = response.data;
-            },
-            error: function(response) {
-                console.log('Failure', response);
-            }
-        });*/
-
         return $http({
             url: 'get_prompts.php',
             method: 'post',
