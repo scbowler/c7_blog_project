@@ -92,27 +92,26 @@
 
         <div id="characterForm" ng-app="fakeApp" ng-controller="userProfileController as uc">
             <button ng-click="uc.sendCharacter()">Load a Dummy</button>
-            <h3>{{uc.userData.name}}'s Account</h3>
-            <table class="table table-condensed">
-                Maybe put stories links here
+            <h1>{{uc.userData.name}}'s Account</h1>
+            <table class="table table-bordered table-hover">
                 <tbody>
                 <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Password</th>
+                    <th>Name</th>
+                    <th>{{uc.userData.name}}</th>
+                    <th><button class="btn btn-warning" ng-click="uc.doSometing()">Edit</button></th>
                 </tr>
                 <tr>
-                    <td>{{uc.userData.id}}</td>
-                    <td>{{uc.userData.course}}:</td>
-                    <td>{{uc.userData.grade}}</td>
-                    <td>{{uc.userData.course}}</td>
+                    <th>Email</th>
+                    <th>{{uc.userData.course}}</th>
+                    <th><button class="btn btn-warning" ng-click="uc.doSometing()">Edit</button></th>
+                </tr>
+                <tr>
+                    <th>Id</th>
+                    <th>{{uc.userData.id}}</th>
+                    <th><button class="btn btn-warning" ng-click="uc.doSometing()">Edit</button></th>
                 </tr>
                 </tbody>
             </table>
-
-
-
 
                 <!--testing $HTML-->
                 <p ng-bind="uc.tester"></p>
