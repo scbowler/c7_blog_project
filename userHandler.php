@@ -38,6 +38,7 @@
             'message' => 'The username does not exist or password is incorrect.'
         ];
     }
+    mysqli_close($connect);
     $output_string = json_encode($output);
     print $output_string; //{"success":true}
 ?>
