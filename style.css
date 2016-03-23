@@ -1,28 +1,143 @@
 html, body {
     height: 100%;
 }
-#title {
-    width: 100%;
-    display: inline-block;
-    text-align: center;
-    height: 10vh;
-    background-color: cornflowerblue;
+
+header {
+    display: flex;
+    align-items: center;
+    background-color: #fafbfc;
+    height: 20vh;
+    border-bottom: 1px solid #dbe0e4;
+
 }
 
+.header-container {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#title {
+
+    height: 95%;
+    display: flex;
+    align-items: center;
+
+}
+
+#title img {
+    height: 70px;
+}
+
+#title .subtitle {
+    font-family: 'Imprima', sans-serif;
+    line-height: 1.5em;
+    display: inline-block;
+    width: 150px;
+    border-left: 1px solid #ced3d7;
+    padding-left: 10px;
+    margin-left: 10px;
+    margin-top: 5px;
+    color: #676184;
+}
+
+.user-menu {
+    font-family: 'Quando', serif;
+    position: relative;
+}
+
+.user-menu-name {
+    border: 1px solid #3fcce5;
+    border-radius: 7px;
+    background-color: #fafbfc;
+    padding: 9px 10px;
+    font-size: 1em;
+    box-sizing: border-box;
+    color: #3fcce5;
+    text-align: center;
+    box-shadow: 2px 2px #3fcce5;
+
+}
+
+.user-menu-name span {
+    position: relative;
+    top: 2px;
+}
+
+.user-menu ul {
+    width: 100%;
+    display: none;
+    position: absolute;
+    padding: 5px 0;
+    list-style: none;
+    font-size: .9em;
+    border: 1px solid #3fcce5;
+    border-radius: 7px;
+    background-color: #fafbfc;
+    box-shadow: 2px 2px #3fcce5;
+
+}
+
+.user-menu ul li {
+    padding: 7px 10px;
+    color: #332d4e;
+}
+
+.user-menu:hover .user-menu-name{
+    border-radius: 7px 7px 0 0;
+    border-bottom-color: #ced3d7;
+}
+
+.user-menu:hover ul{
+
+    border-top: none;
+    display: inline-block;
+    border-radius: 0 0 7px 7px;
+    text-decoration: none;
+
+}
+
+.user-menu li:hover {
+    background-color: #3fcce5;
+    color: #f1f4f7;
+    cursor: pointer;
+    text-decoration: none;
+
+}
+
+.user-menu a:hover {
+    text-decoration: none;
+}
+
+
 .main-container {
-    min-height: 100%;
+    min-height: 69vh;
     display: flex;
     flex-direction: row;
-    background-color: lightblue;
+    background-color: #f1f4f7;
 }
 
 nav {
-    background-color: hotpink;
-    width: 20vw;
+    width: 15vw;
+    background-color: #ced3d7;
+
+}
+
+nav ul {
+    list-style: none;
+    padding: 0 10px;
+}
+
+nav ul li {
+    margin: 1px;
+    padding: 7px;
+
 }
 
 .main-body {
-    width: 80vw;
+    width: 85vw;
     padding: 30px;
 }
 
@@ -50,5 +165,7 @@ footer {
     width: 100%;
     display: inline-block;
     height: 10vh;
-    background-color: dodgerblue;
+    background-color: #fafbfc;
+    border-top: 1px solid #dbe0e4;
+
 }

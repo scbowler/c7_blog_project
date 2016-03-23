@@ -13,9 +13,9 @@
     $password = $_POST['password'];
 
     $regex = [
-        ['field'=>$username, 'regex'=>'/[a-zA-Z0-9]{3,16}/', 'error_message'=>'id must be a number between 2 and 5 digits long'],
+        ['field'=>$username, 'regex'=>'/^[a-zA-Z0-9]{3,16}$/', 'error_message'=>'id must be a number between 2 and 5 digits long'],
         ['field'=>$email, 'regex'=>'/^\S+@\S+$/', 'error_message'=>'The email must be in a valid format'],
-        ['field'=>$password, 'regex'=>'/[a-zA-Z0-9]{5,32}/', 'error_message'=>'name must be 3 letters or more']
+        ['field'=>$password, 'regex'=>'/^[a-zA-Z0-9]{5,32}$/', 'error_message'=>'name must be 3 letters or more']
     ];
     if(preg_match($regex[0]['regex'], $username) && preg_match($regex[1]['regex'], $email) && preg_match($regex[2]['regex'], $password)) {
         $query = "INSERT INTO `users` (`username`, `email`, `password`) VALUES ('$username', '$email', '$password')";
