@@ -41,10 +41,6 @@ form {
     padding: 1%;
 }
 
-form div {
-
-}
-
 form input[type="text"] {
     width: 25%;
 }
@@ -55,7 +51,9 @@ form input[type="submit"]{
     right: 1%;
 }
 
-form * {
+textarea {
     position: relative;
-    border: 1px solid red;
+    width: 60%;
+    max-width: 100%;
+    margin-bottom: 2%;
 }
