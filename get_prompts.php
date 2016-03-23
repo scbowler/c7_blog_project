@@ -1,4 +1,7 @@
 <?php
+    echo '<pre>';
+    print_r($_POST);
+    echo '</pre>';
     if (empty($_POST['mode'])) {
         $mode = 'all';
     } else {

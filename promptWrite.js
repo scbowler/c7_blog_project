@@ -30,7 +30,7 @@ app.service('promptWriteService', function(){
                 console.log('Failure', response);
             }
         });
-});
+};
 
 app.controller('promptWriteController', function(promptWriteService){
 
