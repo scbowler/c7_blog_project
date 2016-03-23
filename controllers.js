@@ -1,24 +1,15 @@
     angular.module("storyPress")
-
+        /**
+         * Character Creation Service - Not yet implemented used for testing ajax requests
+        * */
         .service("characterService", function ($http) {
-            this.test = "testing yo";
-            var service = {};
-            var baseUrl = "get_prompts.php";
-            var url = '';
-            var char = '';
-            var makeUrl = function () {
-                url = baseUrl// + char + "&callback=JSON_CALLBACK"
-            };
-            this.setInfo = function (charObj) {
-                char = charObj;
-            };
+            this.test = "test variable";
+
             this.createCharacter = function () {
-                makeUrl();
-                console.log(url);
 
                 return $http({
                     method: 'POST',
-                    url: baseUrl,
+                    url: "get_stories.php",
                     data: {mode: 'user', id: 7},
                     dataType: "json"
                 })
