@@ -6,8 +6,8 @@
                     templateUrl: 'fakeLandingPage.html'
                 })
                 .when('/login', {
-                    templateUrl: 'userLogin.html',
-                    controller: 'userCtrl',
+                    templateUrl: 'userProfile.html',
+                    controller: 'userProfileController',
                     controllerAs: 'uc'
                 })
                 .when('/account', {
@@ -24,6 +24,11 @@
                     templateUrl: 'characterCreation.html',
                     controller: "characterController",
                     controllerAs: 'cc'
+                })
+                .when('/somethingelse',{
+                    templateUrl: 'userLogin.html',
+                    controller: "userProfileController",
+                    controllerAs: 'uc'
                 })
                 .otherwise({
                     redirectTo: '/index'

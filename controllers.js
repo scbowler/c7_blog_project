@@ -46,41 +46,36 @@
         })
         .service("userProfileService", function ($http) {
             var userProfileScope = this;
+            var loggedIn = false;
             this.test = "testing yo";
-            var baseUrl = "get_stories.php";
+            var baseUrl = "userHandler.php";
             var url = '';
             var char = '';
-            this.userData = {};
-            this.allData = {};
-
-            var makeUrl = function(){
-                url = baseUrl + char + "&callback=JSON_CALLBACK"
-            };
+            this.userData = {name: "hey inital value"};
 
             this.setInfo = function(charObj){
                 char = charObj;
             };
+            //{mode:"all", page:1, per_page: 10}
+            this.loadUserData = function(name, key){
 
-            this.loadUserData = function(){
-                makeUrl();
-
-                var dataString = $.param({mode:"all", page:1, per_page: 10});
+                var dataString = $.param({user_name: name, password: key});
 
                 return $http({
                     method: "POST",
                     url: baseUrl,
                     data: dataString,
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    cache: false,
+                    dataType: "json"
                 })
                     .then(function (response) {
                             console.log(response);
-                            //userProfileScope.allData = response.data.data;
-
-//                                        var rand = Math.floor(Math.random()* response.data.data.length);
-//                                        userProfileScope.userData = response.data.data[rand];
+                            userProfileScope.userData.name = name;
+                            userProfileScope.loggedIn = true;
                         },
                         function (error) {
-                            return error;
+                            console.log(error);
                         });
             }
         })
@@ -88,9 +83,10 @@
         .controller("userProfileController", function (userProfileService, $log) {
             this.tester = userProfileService.test;
             var userProfileScope = this;
+            this.loggedIn = false;
             this.userData = userProfileService.userData;
             this.allData = userProfileService.allData;
-            this.loading = "Load";
+            this.loading = userProfileService.loggedIn;
 
             this.results = userProfileService.results;
 
@@ -101,15 +97,20 @@
             this.submitLoad = function(){
                 return this.loading;
             };
-            this.sendCharacter = function(){
-                userProfileService.loadUserData()
+
+            this.loginUser = function(){
+                console.log("login attempt", userProfileScope.loggedIn, userProfileService.userData);
+                var userName =  $('#name').val();
+                var password = $('#password').val();
+                //console.log(userName, password);
+                userProfileService.loadUserData(userName, password)
                     .then(function(response){
                         userProfileScope.userData = userProfileService.userData;
-                        userProfileScope.allData = userProfileService.allData;
+                        console.log("login success", userProfileScope.userData);
+                        userProfileScope.loggedIn = true;
                     },function(error){
                         $log.warn(error);
                     });
-
             };
         })
 
@@ -118,6 +119,8 @@
             this.tester = characterService.test;
             characterScope = this;
             this.char = {};
+            this.name = "";
+            this.key = "";
             this.loading = "Submit";
             this.logIt = function () {
                 console.log(this.char);
@@ -151,4 +154,27 @@
 //                                characterScope.loading = "Submit";
                     });
             };
-        })
+        });
+
+//    this.loadUserData = function(){
+//        makeUrl();
+//
+//        var dataString = $.param({mode:"all", page:1, per_page: 10});
+//
+//        return $http({
+//            method: "POST",
+//            url: baseUrl,
+//            data: dataString,
+//            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+//        })
+//            .then(function (response) {
+//                    console.log(response);
+//                    //userProfileScope.allData = response.data.data;
+//
+////                                        var rand = Math.floor(Math.random()* response.data.data.length);
+////                                        userProfileScope.userData = response.data.data[rand];
+//                },
+//                function (error) {
+//                    return error;
+//                });
+//    }
