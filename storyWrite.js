@@ -34,12 +34,38 @@ app.service('storyWriteService', function($http){
                 }
             );
     }
+
+    this.postStory = function (title, story) {
+        console.log('Attempting to contact server');
+
+        return $http({
+            url: 'edit_prompts.php',
+            method: 'post',
+            cache: false,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            data: $.param({
+                mode: 'add',
+                title: description,
+                description: description,
+                genre: genre,
+                setting: setting
+            })
+        })
+            .then(
+                function (response) {
+                    console.log('Success', response);
+                },
+                function (error) {
+                    console.log('Failure', error);
+                }
+            );
+    };
 });
 
 app.controller('storyWriteController', function(storyWriteService){
     var selfCont = this;
 
-    storyWriteService.getPrompt(2).then(
+    storyWriteService.getPrompt(16).then(
         function () {
             selfCont.prompt = storyWriteService.dataServ.description;
             selfCont.genre = storyWriteService.dataServ.genre;
@@ -48,5 +74,6 @@ app.controller('storyWriteController', function(storyWriteService){
             selfCont.postDate = storyWriteService.dataServ.created;
         });
 
+    this.post = storyWriteService.postStory;
 });
 

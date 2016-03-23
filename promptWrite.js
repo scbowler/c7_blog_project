@@ -5,10 +5,8 @@
 var app = angular.module('promptWriteApp', []);
 
 app.service('promptWriteService', function($http) {
-    var selfServ = this;
-    this.dataServ = null;
 
-    this.postPrompt = function (promptID) {
+    this.postPrompt = function (description, genre, setting) {
         console.log('Attempting to contact server');
 
         return $http({
@@ -18,10 +16,10 @@ app.service('promptWriteService', function($http) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             data: $.param({
                 mode: 'add',
-                title: 'Dummy Title 1',
-                description: 'Dummy Prompt 1',
-                genre: 'Dummy Genre 1',
-                setting: 'Dummy Setting 1'
+                title: description,
+                description: description,
+                genre: genre,
+                setting: setting
             })
         })
             .then(
