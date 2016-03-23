@@ -24,31 +24,38 @@ nav {
 .main-body {
     width: 80vw;
     padding: 30px;
+
 }
 
-.prompts {
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 5px;
-}
-
-.prompt-label {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.stories {
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 5px;
-}
-
-h4 {
-    font-weight: bold;
-}
 footer {
     width: 100%;
     display: inline-block;
     height: 10vh;
     background-color: dodgerblue;
+}
+
+
+form {
+    position: relative;
+    border: 1px solid green;
+    padding: 1%;
+}
+
+form div {
+
+}
+
+form input[type="text"] {
+    width: 25%;
+}
+
+form input[type="submit"]{
+    position: absolute;
+    bottom: 1%;
+    right: 1%;
+}
+
+form * {
+    position: relative;
+    border: 1px solid red;
 }
