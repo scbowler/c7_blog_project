@@ -4,36 +4,37 @@
 
 var app = angular.module('promptWriteApp', []);
 
-app.service('promptWriteService', function() {
+app.service('promptWriteService', function($http) {
     var selfServ = this;
     this.dataServ = null;
 
     this.postPrompt = function (promptID) {
         console.log('Attempting to contact server');
 
-        $.ajax({
+        return $http({
             url: 'edit_prompts.php',
             method: 'post',
             cache: false,
-            dataType: 'json',
-            data: {
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            data: $.param({
                 mode: 'add',
                 title: 'Dummy Title 1',
                 description: 'Dummy Prompt 1',
                 genre: 'Dummy Genre 1',
                 setting: 'Dummy Setting 1'
-            },
-            success: function (response) {
-                console.log('Success', response);
-                selfServ.dataServ = response.data;
-            },
-            error: function (response) {
-                console.log('Failure', response);
-            }
-        });
+            })
+        })
+            .then(
+                function (response) {
+                    console.log('Success', response);
+                },
+                function (error) {
+                    console.log('Failure', error);
+                }
+            );
     };
 });
 
 app.controller('promptWriteController', function(promptWriteService){
-
+    this.post = promptWriteService.postPrompt;
 });
