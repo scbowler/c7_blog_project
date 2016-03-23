@@ -15,7 +15,7 @@
                     controller: "userProfileController",
                     controllerAs: 'uc'
                 })
-                .when('/create', {
+                .when('/signup', {
                     templateUrl: 'newUser.html',
                     controller: 'userProfileController',
                     controllerAs: 'uc'
@@ -33,5 +33,5 @@
                 .otherwise({
                     redirectTo: '/index'
                 })
-        })
+        });
 

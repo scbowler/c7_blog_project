@@ -43,33 +43,36 @@
                 });
             }
         })
+        /**
+         * Main User Service for holding User Data and if making user creations and login Ajax requests
+        * */
         .service("userProfileService", function ($http) {
             var userProfileScope = this;
+            //check if user logged in
             var loggedIn = false;
-            this.test = "testing yo";
+
             var baseUrl = "userHandler.php";
-            var url = '';
-            var char = '';
-            this.userData = {name: "hey inital value"};
 
-            this.setInfo = function(charObj){
-                char = charObj;
-            };
-            //{mode:"all", page:1, per_page: 10}
+            //this.test = "testing yo";
+            //holds User Data
+            this.userData = {name: "inital value"};
+            //User Sign in ajax request takes name and password
             this.loadUserData = function(name, key){
-
+                //converts to string for php servers
                 var dataString = $.param({user_name: name, password: key});
 
                 return $http({
                     method: "POST",
-                    url: baseUrl,
+                    url: 'userHandler.php',
                     data: dataString,
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                     cache: false,
                     dataType: "json"
                 })
                     .then(function (response) {
-                            console.log(response);
+                            //console.log(response);
+                            //no useful info in the login response given so have to rely on input data;
+                            //TODO get back end to give us email and id in response
                             userProfileScope.userData.name = name;
                             userProfileScope.loggedIn = true;
                         },
@@ -77,6 +80,9 @@
                             console.log(error);
                         });
             };
+            /**
+             Create new user Ajax request
+            * */
             this.createUser = function(name, emailAddress, key, confirm){
 
                 var dataString = $.param({
@@ -106,18 +112,15 @@
         })
 
         .controller("userProfileController", function (userProfileService, $log) {
-            this.tester = userProfileService.test;
             var userProfileScope = this;
+
+            //this.test = userProfileService.test;
+            //check if user is logged in
             this.loggedIn = userProfileService.loggedIn;
+            //get user data from server
             this.userData = userProfileService.userData;
-            this.allData = userProfileService.allData;
+            //a loading variable
             this.loading = "";
-
-            this.results = userProfileService.results;
-
-            this.sendCharInfo = function(){
-                userProfileService.setInfo(this.char.name);
-            };
 
             this.submitLoad = function(){
                 return this.loading;
@@ -197,25 +200,3 @@
             };
         });
 
-//    this.loadUserData = function(){
-//        makeUrl();
-//
-//        var dataString = $.param({mode:"all", page:1, per_page: 10});
-//
-//        return $http({
-//            method: "POST",
-//            url: baseUrl,
-//            data: dataString,
-//            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-//        })
-//            .then(function (response) {
-//                    console.log(response);
-//                    //userProfileScope.allData = response.data.data;
-//
-////                                        var rand = Math.floor(Math.random()* response.data.data.length);
-////                                        userProfileScope.userData = response.data.data[rand];
-//                },
-//                function (error) {
-//                    return error;
-//                });
-//    }
