@@ -149,11 +149,11 @@
             .service("characterService", function ($http) {
                 this.test = "testing yo";
                 var service = {};
-                var baseUrl = "https://itunes.apple.com/search?term=";
+                var baseUrl = "get_prompts.php";
                 var url = '';
                 var char = '';
                 var makeUrl = function(){
-                    url = baseUrl + char + "&callback=JSON_CALLBACK"
+                    url = baseUrl// + char + "&callback=JSON_CALLBACK"
                 };
                 this.setInfo = function(charObj){
                     char = charObj;
@@ -162,7 +162,12 @@
                     makeUrl();
                     console.log(url);
 
-                    return $http({method:'jsonp',url:url, cache:false})
+                    return $http({
+                                method:'get',
+                                url:url,
+                                data: {mode:'all', page:1, per_page:10, prompt_id:2},
+                                cache:false
+                            })
                             .then(function(response){
                                 return response.data;
                             }, function(error){
@@ -178,7 +183,6 @@
                 this.loading = "Submit";
                 this.logIt = function(){
                     console.log(this.char);
-
                 };
 
                 this.data = {};
@@ -198,13 +202,13 @@
                     characterService.createCharacter()
                             .then(function(data){
                                 console.log(data);
-                                characterScope.data = data.results;
-                                characterScope.loading = "Submit";
-                                characterScope.char = {};
+//                                characterScope.data = data.results;
+//                                characterScope.loading = "Submit";
+//                                characterScope.char = {};
 
                             }, function(data){
                                 $log.warn(data);
-                                characterScope.loading = "Submit";
+//                                characterScope.loading = "Submit";
                             });
                 };
             })
