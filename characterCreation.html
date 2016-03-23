@@ -122,16 +122,16 @@
                     <tr>
                         <th>#</th>
                         <th>Image</th>
-                        <th>Artist Name</th>
-                        <th>Track Name</th>
-                        <th>Price</th>
+                        <th>category</th>
+                        <th>genre</th>
+                        <th>description</th>
                     </tr>
                     <tr ng-repeat="song in cc.data">
                         <td>{{ $index + 1 }}</td>
                         <td><img ng-src="{{ song.artworkUrl60 }}"></td>
                         <td>{{ song.category }}:</td>
+                        <td>{{ song.genre }}</td>
                         <td>{{ song.description }}</td>
-                        <td>{{ song.trackPrice }}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -145,18 +145,6 @@
 <footer>Footer stuff</footer>
 </body>
 <script>
-    function getData(){
-        $.ajax({
-            url: 'get_prompts.php',
-            method: 'POST',
-//            data: {mode:'all', page:1, per_page:2},
-            data: {mode:'user', id:2},
-            dataType: 'json',
-            success: function(response){
-                console.log(response);
-            }
-        });
-    }
 
     angular.module("fakeApp", [])
             .service("characterService", function ($http) {
@@ -186,6 +174,20 @@
                             }, function(error){
                                 return error;
                             });
+                };
+
+                this.getData = function(){
+                    return $.ajax({
+                        url: 'get_prompts.php',
+                        method: 'POST',
+                        data: {mode:'all', page:1, per_page:2},
+                        //   data: {mode:'user', id:7},
+                        dataType: 'json',
+                        success: function(response){
+                            console.log(response);
+                            return response;
+                        }
+                    });
                 }
             })
 
@@ -212,10 +214,11 @@
                 this.sendCharacter = function(){
                     this.loading = "Loading";
                     this.sendCharInfo();
-                    characterService.createCharacter()
+                    characterService.getData()
                             .then(function(response){
-                                console.log(response.data.data);
-                                characterScope.data = response.data.data;
+                                console.log(response.data);
+                                characterScope.data =  response.data;
+//                                characterScope.data = response.data.data;
 //                                characterScope.loading = "Submit";
 //                                characterScope.char = {};
 
