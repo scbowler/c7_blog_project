@@ -148,7 +148,7 @@
             .service("userProfileService", function ($http) {
                 var userProfileScope = this;
                 this.test = "testing yo";
-                var baseUrl = "http://s-apis.learningfuze.com/sgt/get";
+                var baseUrl = "get_stories.php";
                 var url = '';
                 var char = '';
                 this.userData = {};
@@ -165,7 +165,7 @@
                 this.loadUserData = function(){
                     makeUrl();
 
-                    var dataString = $.param({api_key: "L91wptvUmZ"});
+                    var dataString = $.param({mode:"all", page:1, per_page: 10});
 
                     return $http({
                         method: "POST",
@@ -174,11 +174,11 @@
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                     })
                             .then(function (response) {
+                                console.log(response);
+                                        //userProfileScope.allData = response.data.data;
 
-                                        userProfileScope.allData = response.data.data;
-
-                                        var rand = Math.floor(Math.random()* response.data.data.length);
-                                        userProfileScope.userData = response.data.data[rand];
+//                                        var rand = Math.floor(Math.random()* response.data.data.length);
+//                                        userProfileScope.userData = response.data.data[rand];
                                     },
                                     function (error) {
                                         return error;

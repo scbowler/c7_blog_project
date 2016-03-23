@@ -129,8 +129,8 @@
                     <tr ng-repeat="song in cc.data">
                         <td>{{ $index + 1 }}</td>
                         <td><img ng-src="{{ song.artworkUrl60 }}"></td>
-                        <td>{{ song.artistName }}:</td>
-                        <td>{{ song.trackName }}</td>
+                        <td>{{ song.category }}:</td>
+                        <td>{{ song.description }}</td>
                         <td>{{ song.trackPrice }}</td>
                     </tr>
                     </tbody>
@@ -149,15 +149,14 @@
         $.ajax({
             url: 'get_prompts.php',
             method: 'POST',
-            data: {mode:'all', page:1, per_page:10},
+//            data: {mode:'all', page:1, per_page:2},
+            data: {mode:'user', id:2},
             dataType: 'json',
             success: function(response){
                 console.log(response);
             }
         });
     }
-
-
 
     angular.module("fakeApp", [])
             .service("characterService", function ($http) {
@@ -179,7 +178,7 @@
                     return $http({
                                 method:'POST',
                                 url: baseUrl,
-                                data: {mode:'all', page:1, per_page:10},
+                                data: {mode:'user', id:7},
                                 dataType: "json"
                             })
                             .then(function(response){
@@ -214,9 +213,9 @@
                     this.loading = "Loading";
                     this.sendCharInfo();
                     characterService.createCharacter()
-                            .then(function(data){
-                                console.log(data);
-//                                characterScope.data = data.results;
+                            .then(function(response){
+                                console.log(response.data.data);
+                                characterScope.data = response.data.data;
 //                                characterScope.loading = "Submit";
 //                                characterScope.char = {};
 
