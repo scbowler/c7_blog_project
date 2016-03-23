@@ -29,7 +29,7 @@ app.service('storyWriteService', function($http){
             }
         });*/
 
-        $http({
+        return $http({
             url: 'get_prompts.php',
             method: 'post',
             cache: false,
@@ -42,11 +42,12 @@ app.service('storyWriteService', function($http){
             .then(
                 function(response){
                     console.log('Success', response);
-                    selfServ.dataServ = response.data;
+                    selfServ.dataServ = response.data.data[0];
+                    console.log(selfServ.dataServ);
                 },
-                function(response){
-                    console.log('Failure',response);
-                    selfServ.dataServ = response;
+                function(error){
+                    console.log('Failure',error);
+                    selfServ.dataServ = error;
                 }
             );
     }
@@ -55,12 +56,14 @@ app.service('storyWriteService', function($http){
 app.controller('storyWriteController', function(storyWriteService){
     var selfCont = this;
 
-    storyWriteService.getPrompt(4);
+    storyWriteService.getPrompt(2).then(
+        function () {
+            selfCont.prompt = storyWriteService.dataServ.description;
+            selfCont.genre = storyWriteService.dataServ.genre;
+            selfCont.setting = storyWriteService.dataServ.setting;
+            selfCont.poster = storyWriteService.dataServ.user_id;
+            selfCont.postDate = storyWriteService.dataServ.created;
+        });
 
-    this.prompt = storyWriteService.dataServ.description;
-    this.genre = storyWriteService.dataServ.genre;
-    this.setting = storyWriteService.dataServ.setting;
-    this.poster = storyWriteService.dataServ.user_id;
-    this.postDate = storyWriteService.dataServ.created;
 });
 
