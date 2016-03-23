@@ -16,11 +16,13 @@
     <!-- AngularJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
 
+    <!-- JS -->
+    <script src="storyWrite.js"></script>
+
     <!-- STYLE -->
     <link rel="stylesheet" type="text/css" href="storyWrite.css">
 </head>
-
-<body>
+<body ng-app="storyWriteApp">
 <header>
     <div id="title">
         <!--temp title or maybe not-->
@@ -43,21 +45,22 @@
         </ul>
     </nav>
 
-    <div class="main-body">
+    <div class="main-body" ng-controller="storyWriteController as swc" ng-init="swc.prompt='Prompt Description';
+     swc.genre='Genre'; swc.setting='Setting'; swc.poster='userName'; swc.postDate='1111/1/1';">
         <main>
             <p>Create A Story</p>
             <div id="promptBox">
-                <p id="storyTitle">Title</p>
-                <p id="storyPrompt">Prompt description</p>
-                <p id="storyGenre">Genre</p>
-                <p id="storySetting">Setting</p>
-                <p id="posted">Posted by dSulli on 2016/3/21</p>
+                <p id="storyPrompt">{{swc.prompt}}</p>
+                <p id="storyGenre">{{swc.genre}}</p>
+                <p id="storySetting">{{swc.setting}}</p>
+                <p id="posted">Posted by {{swc.poster}} on {{swc.postDate}}</p>
             </div>
             <form action="TARGET_PHP_GOES_HERE">
+                <p>Title</p>
+                <input type="text" placeholder="Write your title here!" ng-model="swc.title">
                 <p>Story</p>
-        <textarea placeholder="Write your short story here!">
-
-        </textarea>
+                <textarea placeholder="Write your short story here!" ng-model="swc.story">
+                </textarea>
                 <input type="submit">
             </form>
         </main>
