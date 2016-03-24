@@ -26,12 +26,16 @@
 
     switch ($mode) {
         case 'add':
-            if (empty($_POST['title']) || empty($_POST['summary'])) {
+            if (empty($_POST['title'])) {
                 http_response_code(403);
                 exit();
             }
-            $fields = "title, summary, user_id";
-            $fieldValues = "'{$_POST['title']}', '{$_POST['summary']}', '{$userId}'";
+            $fields = "title, user_id";
+            $fieldValues = "'{$_POST['title']}', '{$userId}'";
+            if (!empty($_POST['summary'])) {
+                $fields .= ", summary";
+                $fieldValues .= ", '{$_POST['summary']}'";
+            }
 
             $query = "INSERT INTO `storys`($fields) VALUES ($fieldValues);";
             $output['query'] = $query;
