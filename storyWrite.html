@@ -23,28 +23,6 @@
     <link rel="stylesheet" type="text/css" href="storyWrite.css">
 </head>
 <body ng-app="storyWriteApp">
-<header>
-    <div id="title">
-        <!--temp title or maybe not-->
-        <h1>Story Press</h1>
-        <!--come up with better tag line-->
-        <span>Come up with a prompt, or write a story based on one!</span>
-    </div>
-</header>
-<div class="main-container">
-    <nav class="sidebar">
-        <div>
-            <span>fontawesome icon here</span>
-            <span>username</span>
-        </div>
-        <ul>
-            <li>Browse Stories/Prompts</li>
-            <li>My Stories</li>
-            <li>My Prompts</li>
-            <li>Account Settings</li>
-        </ul>
-    </nav>
-
     <div class="main-body" ng-controller="storyWriteController as swc" ng-init="swc.prompt='Prompt Description';
      swc.genre='Genre'; swc.setting='Setting'; swc.poster='userName'; swc.postDate='1111/1/1';">
         <main>
@@ -65,8 +43,5 @@
             </form>
         </main>
     </div>
-</div>
-
-<footer>Footer stuff</footer>
 </body>
 </html>

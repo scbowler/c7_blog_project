@@ -21,6 +21,8 @@
     <script src="angularApp.js"></script>
     <script src="controllers.js"></script>
     <script src="landingPage.js"></script>
+    <script src="storyWrite.js"></script>
+    <script src="promptWrite.js"></script>
 
     <link href='https://fonts.googleapis.com/css?family=Quando|Source+Sans+Pro:400,700,400italic' rel='stylesheet' type='text/css'>
 
@@ -39,12 +41,12 @@
         </div>
         <div class="user-menu">
             <div class="user-menu-name" ng-controller="userProfileController as uc">
-                <span ng-show="uc.loggedIn">{{ uc.userData.name }} <span class="glyphicon glyphicon-triangle-bottom"></span></span>
-                <span ng-hide="uc.loggedIn"><a href="#login">Log In</a></span>
+                {{ uc.userData.name }} <span class="glyphicon glyphicon-triangle-bottom"></span>
+<!--                <span ng-hide="uc.loggedIn"><a href="#login">Log In</a></span>-->
 
             </div>
-            <ul ng-show="uc.loggedIn">
-                <a href="#"><li>Write Prompt</li></a>
+            <ul>
+                <a href="#promptWrite"><li>Write Prompt</li></a>
                 <a href="#"><li>Account</li></a>
                 <a href="#"><li>Logout</li></a>
             </ul>

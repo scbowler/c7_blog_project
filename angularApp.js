@@ -32,6 +32,16 @@
                     controller: "userProfileController",
                     controllerAs: 'uc'
                 })
+                .when('/storyWrite',{
+                    templateUrl: 'storyWrite.html',
+                    controller: "storyWriteController",
+                    controllerAs: 'swc'
+                })
+                .when('/promptWrite',{
+                    templateUrl: 'promptWrite.html',
+                    controller: "promptWriteController",
+                    controllerAs: 'pwc'
+                })
                 .otherwise({
                     redirectTo: '/index'
                 })
