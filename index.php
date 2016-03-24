@@ -1,7 +1,10 @@
 <?php
     include 'header.php';
 ?>
-heeelllooooooooooooooooooooooooo
+
+<ng-view></ng-view>
+
+
 <?php
     include 'footer.php';
 ?>

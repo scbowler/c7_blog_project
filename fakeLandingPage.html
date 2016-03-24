@@ -1,0 +1,21 @@
+<div class="container main-container" ng-init="lc.sendCharacter()">
+    <h2>Browse Prompts</h2>
+    <nav id="browse-nav">
+        <a href="#">Prompts</a>
+        <a href="#">Finished Stories</a>
+    </nav>
+    <div class="prompt-container">
+        <div class="prompts" ng-repeat="prompt in lc.data">
+            <h4>{{ prompt.title }}</h4>
+            <p><span class="prompt-label">Genre:</span> {{ prompt.genre }} </p>
+            <p><span class="prompt-label">Setting:</span> {{ prompt.setting }}</p>
+            <p><span class="prompt-label">Plot:</span>
+                {{ prompt.description }}
+            </p>
+            <a href="#">Write Story</a>
+            <a href="#">View Stories</a>
+        </div>
+
+    </div>
+    <br>
+</div>

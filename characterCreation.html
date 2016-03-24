@@ -1,233 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Story Press</title>
+<div class="main-body">
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-    <!-- AngularJS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-
-    <style>
-        body {
-            font-family: Arial;
-            box-sizing: border-box;
-        }
-
-        input[type=text], select {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        textarea {
-            width: 100%;
-            height: 150px;
-            padding: 12px 20px;
-            box-sizing: border-box;
-            border: 2px solid #ccc;
-            border-radius: 4px;
-            background-color: #f8f8f8;
-            resize: none;
-        }
-
-        input[type=submit] {
-            width: 100%;
-            background-color: #4ed1ff;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        input[type=submit]:hover {
-            background-color: #2efaff;
-        }
-
-
-    </style>
-    <link rel="stylesheet" text="text/css" href="style.css">
-
-</head>
-<body>
-<header>
-    <div id="title">
-        <!--temp title or maybe not-->
-        <h1>Story Press</h1>
-        <!--come up with better tag line-->
-        <span>Come up with a prompt, or write a story based on one!</span>
-    </div>
-</header>
-
-<div class="main-container">
-    <nav class="sidebar">
+    <div id="characterForm" ng-app="storyPress">
+        <h3>Create New Character</h3>
         <div>
-            <span>fontawesome icon here</span>
-            <span>username</span>
-        </div>
-        <ul>
-            <li>Browse Stories/Prompts</li>
-            <li>My Stories</li>
-            <li>My Prompts</li>
-            <li>Account Settings</li>
-        </ul>
-    </nav>
+            <form  ng-submit="cc.sendCharacter()">
+                <label for="cName">Name</label>
+                <input type="text" id="cName" name="name" ng-model="cc.char.name">
 
-    <div class="main-body">
+                <label for="cApperance">Physical Appearance</label>
+                <textarea type="text" id="cApperance" name="apperance" ng-model="cc.char.appearance"></textarea>
 
-        <div id="characterForm" ng-app="fakeApp" ng-controller="characterController as cc">
-            <h3>Create New Character</h3>
-            <div>
-                <form  ng-submit="cc.sendCharacter()">
-                    <label for="cName">Name</label>
-                    <input type="text" id="cName" name="name" ng-model="cc.char.name">
+                <label for="cBackground">Background</label>
+                <textarea type="text" id="cBackground" name="background" ng-model="cc.char.background"></textarea>
 
-                    <label for="cApperance">Physical Appearance</label>
-                    <textarea type="text" id="cApperance" name="apperance" ng-model="cc.char.appearance"></textarea>
+                <label for="cPersonality">Personality</label>
+                <textarea type="text" id="cPersonality" name="personality" ng-model="cc.char.personality"></textarea>
 
-                    <label for="cBackground">Background</label>
-                    <textarea type="text" id="cBackground" name="background" ng-model="cc.char.background"></textarea>
+                <label for="cRelations">Relations</label>
+                <select id="cRelations" name="relations" ng-model="cc.char.relations">
+                    <option value="1235136DaF32">TenderHeart Bear</option>
+                    <option value="3246f23as">Optimus Prime</option>
+                    <option value="12a24231">ScoobyDoo</option>
+                </select>
 
-                    <label for="cPersonality">Personality</label>
-                    <textarea type="text" id="cPersonality" name="personality" ng-model="cc.char.personality"></textarea>
-
-                    <label for="cRelations">Relations</label>
-                    <select id="cRelations" name="relations" ng-model="cc.char.relations">
-                        <option value="1235136DaF32">TenderHeart Bear</option>
-                        <option value="3246f23as">Optimus Prime</option>
-                        <option value="12a24231">ScoobyDoo</option>
-                    </select>
-
-                    <input type="submit" ng-value="cc.submitLoad()" >
-                </form>
-                <!--testing $HTML-->
-                <p ng-bind="cc.tester"></p>
-                <table>
-                    <tbody>
-                    <tr>
-                        <th>#</th>
-                        <th>Image</th>
-                        <th>category</th>
-                        <th>genre</th>
-                        <th>description</th>
-                    </tr>
-                    <tr ng-repeat="song in cc.data">
-                        <td>{{ $index + 1 }}</td>
-                        <td><img ng-src="{{ song.artworkUrl60 }}"></td>
-                        <td>{{ song.category }}:</td>
-                        <td>{{ song.genre }}</td>
-                        <td>{{ song.description }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-                <!--end Test-->
-            </div>
+                <input type="submit" ng-value="cc.submitLoad()" >
+            </form>
+            <!--testing $HTML-->
+            <p ng-bind="cc.tester"></p>
+            <table>
+                <tbody>
+                <tr>
+                    <th>#</th>
+                    <th>Image</th>
+                    <th>category</th>
+                    <th>genre</th>
+                    <th>description</th>
+                </tr>
+                <tr ng-repeat="song in cc.data">
+                    <td>{{ $index + 1 }}</td>
+                    <td><img ng-src="{{ song.artworkUrl60 }}"></td>
+                    <td>{{ song.category }}:</td>
+                    <td>{{ song.genre }}</td>
+                    <td>{{ song.description }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <!--end Test-->
         </div>
     </div>
-
 </div>
 
-<footer>Footer stuff</footer>
-</body>
-<script>
 
-    angular.module("fakeApp", [])
-            .service("characterService", function ($http) {
-                this.test = "testing yo";
-                var service = {};
-                var baseUrl = "get_prompts.php";
-                var url = '';
-                var char = '';
-                var makeUrl = function(){
-                    url = baseUrl// + char + "&callback=JSON_CALLBACK"
-                };
-                this.setInfo = function(charObj){
-                    char = charObj;
-                };
-                this.createCharacter = function(){
-                    makeUrl();
-                    console.log(url);
-
-                    return $http({
-                                method:'POST',
-                                url: baseUrl,
-                                data: {mode:'user', id:7},
-                                dataType: "json"
-                            })
-                            .then(function(response){
-                                return response;
-                            }, function(error){
-                                return error;
-                            });
-                };
-
-                this.getData = function(){
-                    return $.ajax({
-                        url: 'get_prompts.php',
-                        method: 'POST',
-                        data: {mode:'all', page:1, per_page:2},
-                        //   data: {mode:'user', id:7},
-                        dataType: 'json',
-                        success: function(response){
-                            console.log(response);
-                            return response;
-                        }
-                    });
-                }
-            })
-
-            .controller("characterController", function (characterService, $log) {
-                this.tester = characterService.test;
-                characterScope = this;
-                this.char = {};
-                this.loading = "Submit";
-                this.logIt = function(){
-                    console.log(this.char);
-                };
-
-                this.data = {};
-                this.results = characterService.results;
-
-                this.sendCharInfo = function(){
-                    characterService.setInfo(this.char.name);
-                };
-
-                this.submitLoad = function(){
-                    return this.loading;
-                };
-
-                this.sendCharacter = function(){
-                    this.loading = "Loading";
-                    this.sendCharInfo();
-                    characterService.getData()
-                            .then(function(response){
-                                console.log(response.data);
-                                characterScope.data =  response.data;
-//                                characterScope.data = response.data.data;
-//                                characterScope.loading = "Submit";
-//                                characterScope.char = {};
-
-                            }, function(data){
-                                $log.warn(data);
-//                                characterScope.loading = "Submit";
-                            });
-                };
-            })
-
-</script>
-</html>
