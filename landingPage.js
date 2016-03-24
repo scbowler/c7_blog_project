@@ -9,7 +9,7 @@ angular.module("storyPress")
             return $.ajax({
                 url: 'get_prompts.php',
                 method: 'POST',
-                data: {mode:'all', page:self.currentPage, per_page:2},
+                data: {mode:'all', page:self.currentPage, per_page:6},
                 //   data: {mode:'user', id:7},
                 dataType: 'json',
                 success: function(response){
@@ -42,9 +42,9 @@ angular.module("storyPress")
         this.data = {};
         this.results = landingPageService.results;
 
-        this.sendCharInfo = function(){
-            landingPageService.setInfo(this.char.name);
-        };
+        //this.sendCharInfo = function(){
+        //    landingPageService.setInfo(this.char.name);
+        //};
 
         this.submitLoad = function(){
 
@@ -53,7 +53,7 @@ angular.module("storyPress")
 
         this.sendCharacter = function(){
             this.loading = "Loading";
-            this.sendCharInfo();
+            //this.sendCharInfo();
             landingPageService.getData()
                 .then(function(response){
                     console.log(response.data);

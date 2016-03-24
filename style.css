@@ -135,28 +135,32 @@ h2 {
     font-family: 'Quando', serif;
     color: #f95858;
     text-align: center;
-    margin: 30px 0;
+    margin: 20px 0 10px;
 
 }
 
 #browse-nav {
     text-align: center;
-    margin: 20px 0;
+    margin: 10px 0;
 
 }
 
 #browse-nav a {
-    padding-bottom: 10px;
-    border-bottom: 2px solid #dbe0e4;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
     margin: 0 20px;
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 700;
     font-size: 1.25em;
+    color: #585177;
+
 
 }
 
 #browse-nav a:hover {
     text-decoration: none;
+    border-bottom: 2px solid #dbe0e4;
+
 }
 
 .prompt-container {
@@ -166,7 +170,6 @@ h2 {
     -webkit-column-gap: 2px;
     -moz-column-gap: 2px;
     column-gap: 2px;
-    padding-top: 20px;
 }
 
 
@@ -184,6 +187,7 @@ h2 {
 
 .prompts h4 {
     font-family: 'Quando', serif;
+    font-size: 1em;
     padding-bottom: 5px;
     text-align: center;
     color: #f95858;

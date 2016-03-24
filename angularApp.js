@@ -3,7 +3,9 @@
         .config(function($routeProvider){
             $routeProvider
                 .when('/index', {
-                    templateUrl: 'fakeLandingPage.html'
+                    templateUrl: 'fakeLandingPage.html',
+                    controller: 'landingPageController',
+                    controllerAs: 'lc'
                 })
                 .when('/login', {
                     templateUrl: 'userProfile.html',
