@@ -61,7 +61,7 @@
                 <p>Story</p>
                 <textarea placeholder="Write your short story here!" ng-model="swc.story">
                 </textarea>
-                <input type="submit">
+                <input type="submit" ng-click="swc.post(swc.title, swc.story);">
             </form>
         </main>
     </div>
