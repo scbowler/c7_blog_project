@@ -46,7 +46,7 @@
             break;
         case 'single':
             $storyId = intval($_POST['story_id']);
-            $query = "SELECT title, summary, user_id, created FROM storys WHERE active=1 AND ID=$storyId";
+            $query = "SELECT title, summary, full_text, user_id, created FROM storys WHERE active=1 AND ID=$storyId";
             break;
     }
     $result = mysqli_query($connect, $query);

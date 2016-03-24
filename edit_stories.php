@@ -36,6 +36,10 @@
                 $fields .= ", summary";
                 $fieldValues .= ", '{$_POST['summary']}'";
             }
+            if (!empty($_POST['full_text'])) {
+                $fields .= ", full_text";
+                $fieldValues .= ", '{$_POST['full_text']}'";
+            }
 
             $query = "INSERT INTO `storys`($fields) VALUES ($fieldValues);";
             $output['query'] = $query;
