@@ -1,0 +1,21 @@
+
+    <div class="main-body">
+        <h1>Controller: {{ pwc.testMsg }}</h1>
+        <form ng-init="pwc.status = 'Submit Prompt';">
+            <div>
+                <p>Genre</p>
+                <input type="text" placeholder="Write your genre here!" ng-model="pwc.genre">
+            </div>
+            <div>
+                <p>Setting</p>
+                <input type="text" placeholder="Write your setting here!" ng-model="pwc.setting">
+            </div>
+            <div>
+                <p>Prompt</p>
+                <textarea placeholder="Write your story prompt here!" ng-model="pwc.prompt">
+                </textarea>
+            </div>
+            <input type="submit" value="{{pwc.status}}" ng-click="pwc.post(pwc.prompt, pwc.genre, pwc.setting);
+                pwc.prompt = ''; pwc.genre = ''; pwc.setting = ''; pwc.status = 'Submitted!';">
+        </form>
+    </div>

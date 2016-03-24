@@ -1,0 +1,53 @@
+<div class="main-body">
+
+    <div id="characterForm" ng-app="storyPress">
+        <h3>Create New Character</h3>
+        <div>
+            <form  ng-submit="cc.sendCharacter()">
+                <label for="cName">Name</label>
+                <input type="text" id="cName" name="name" ng-model="cc.char.name">
+
+                <label for="cApperance">Physical Appearance</label>
+                <textarea type="text" id="cApperance" name="apperance" ng-model="cc.char.appearance"></textarea>
+
+                <label for="cBackground">Background</label>
+                <textarea type="text" id="cBackground" name="background" ng-model="cc.char.background"></textarea>
+
+                <label for="cPersonality">Personality</label>
+                <textarea type="text" id="cPersonality" name="personality" ng-model="cc.char.personality"></textarea>
+
+                <label for="cRelations">Relations</label>
+                <select id="cRelations" name="relations" ng-model="cc.char.relations">
+                    <option value="1235136DaF32">TenderHeart Bear</option>
+                    <option value="3246f23as">Optimus Prime</option>
+                    <option value="12a24231">ScoobyDoo</option>
+                </select>
+
+                <input type="submit" ng-value="cc.submitLoad()" >
+            </form>
+            <!--testing $HTML-->
+            <p ng-bind="cc.tester"></p>
+            <table>
+                <tbody>
+                <tr>
+                    <th>#</th>
+                    <th>Image</th>
+                    <th>category</th>
+                    <th>genre</th>
+                    <th>description</th>
+                </tr>
+                <tr ng-repeat="song in cc.data">
+                    <td>{{ $index + 1 }}</td>
+                    <td><img ng-src="{{ song.artworkUrl60 }}"></td>
+                    <td>{{ song.category }}:</td>
+                    <td>{{ song.genre }}</td>
+                    <td>{{ song.description }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <!--end Test-->
+        </div>
+    </div>
+</div>
+
+

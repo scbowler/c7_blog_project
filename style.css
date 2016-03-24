@@ -1,35 +1,238 @@
 html, body {
     height: 100%;
 }
-#title {
-    width: 100%;
-    display: inline-block;
-    text-align: center;
-    height: 10vh;
-    background-color: cornflowerblue;
+
+p {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #332d4e;
 }
+
+header {
+    display: flex;
+    align-items: center;
+    background-color: #fafbfc;
+    height: 20vh;
+    border-bottom: 1px solid #dbe0e4;
+
+}
+
+.header-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+}
+
+.container {
+    padding: 0;
+}
+
+#title {
+
+    height: 95%;
+    display: flex;
+
+    align-items: center;
+}
+
+#title img {
+    height: 70px;
+}
+
+#title .subtitle {
+    font-family: 'Source Sans Pro', sans-serif;
+    line-height: 1.5em;
+    display: inline-block;
+    width: 150px;
+    border-left: 1px solid #ced3d7;
+    padding-left: 10px;
+    margin-left: 10px;
+    margin-top: 5px;
+    color: #676184;
+}
+
+.user-menu {
+    font-family: 'Quando', serif;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.user-menu-name {
+    border: 1px solid #3fcce5;
+    border-radius: 7px;
+    background-color: #fafbfc;
+    padding: 9px 10px;
+    font-size: 1em;
+    box-sizing: border-box;
+    color: #3fcce5;
+    text-align: center;
+    box-shadow: 2px 2px #3fcce5;
+
+}
+
+.user-menu-name span {
+    position: relative;
+    top: 2px;
+}
+
+.user-menu ul {
+    width: 100%;
+    display: none;
+    position: absolute;
+    padding: 5px 0;
+    list-style: none;
+    font-size: .9em;
+    border: 1px solid #3fcce5;
+    border-radius: 7px;
+    background-color: #fafbfc;
+    box-shadow: 2px 2px #3fcce5;
+    z-index: 1;
+
+}
+
+.user-menu ul li {
+    padding: 7px 10px;
+    color: #332d4e;
+}
+
+.user-menu:hover .user-menu-name{
+    border-radius: 7px 7px 0 0;
+    border-bottom-color: #ced3d7;
+}
+
+.user-menu:hover ul{
+
+    border-top: none;
+    display: inline-block;
+    border-radius: 0 0 7px 7px;
+    text-decoration: none;
+
+}
+
+.user-menu li:hover {
+    background-color: #3fcce5;
+    color: #f1f4f7;
+    cursor: pointer;
+    text-decoration: none;
+
+}
+
+.user-menu a:hover {
+    text-decoration: none;
+}
+
 
 .main-container {
-    min-height: 100%;
-    display: flex;
-    flex-direction: row;
-    background-color: lightblue;
+    min-height: 69vh;
+    padding: 10px 0;
+    background-color: #f1f4f7;
 }
 
-nav {
-    background-color: hotpink;
-    width: 20vw;
-}
 
-.main-body {
-    width: 80vw;
-    padding: 30px;
+h2 {
+    font-family: 'Quando', serif;
+    color: #f95858;
+    text-align: center;
+    margin: 20px 0 10px;
 
 }
 
+#browse-nav {
+    text-align: center;
+    margin: 10px 0;
+
+}
+
+#browse-nav a {
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+    margin: 0 20px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 700;
+    font-size: 1.25em;
+    color: #585177;
+
+
+}
+
+#browse-nav a:hover {
+    text-decoration: none;
+    border-bottom: 2px solid #dbe0e4;
+
+}
+
+.prompt-container {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+    -webkit-column-gap: 2px;
+    -moz-column-gap: 2px;
+    column-gap: 2px;
+}
+
+
+.prompts {
+    border: 1px solid #3fcce5;
+    box-shadow: 2px 2px #3fcce5;
+    background-color: #fafbfc;
+    margin: 5px;
+    border-radius: 5px;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    display: inline-block;
+
+}
+
+.prompts h4 {
+    font-family: 'Quando', serif;
+    font-size: 1em;
+    padding-bottom: 5px;
+    text-align: center;
+    color: #f95858;
+    border-bottom: 1px solid #dbe0e4;
+}
+
+.prompts a {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 700;
+    background-color: #3fcce5;
+    color: #fafbfc;
+    padding: 10px;
+    margin: 5px .5% 0;
+    border-radius: 5px;
+    display: inline-block;
+    width: 48%;
+    text-align: center;
+}
+
+.prompts a:hover {
+    text-decoration: none;
+    background-color: #f95858;
+}
+
+.prompt-label {
+    font-weight: 700;
+    color: #585177;
+}
+
+.stories {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+
+
+h4 {
+    font-weight: bold;
+}
 footer {
     width: 100%;
     display: inline-block;
     height: 10vh;
-    background-color: dodgerblue;
+    background-color: #fafbfc;
+    border-top: 1px solid #dbe0e4;
+
 }

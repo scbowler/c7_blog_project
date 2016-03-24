@@ -1,0 +1,20 @@
+<div class="main-body" ng-controller="storyWriteController as swc" ng-init="swc.prompt='Prompt Description';
+ swc.genre='Genre'; swc.setting='Setting'; swc.poster='userName'; swc.postDate='1111/1/1';">
+    <main>
+        <p>Create A Story</p>
+        <div id="promptBox">
+            <p id="storyPrompt">Prompt: {{swc.prompt}}</p>
+            <p id="storyGenre">Genre: {{swc.genre}}</p>
+            <p id="storySetting">Setting: {{swc.setting}}</p>
+            <p id="posted">Posted by {{swc.poster}} on {{swc.postDate}}</p>
+        </div>
+        <form action="TARGET_PHP_GOES_HERE">
+            <p>Title</p>
+            <input type="text" placeholder="Write your title here!" ng-model="swc.title">
+            <p>Story</p>
+            <textarea placeholder="Write your short story here!" ng-model="swc.story">
+            </textarea>
+            <input type="submit" ng-click="swc.post(swc.title, swc.story);">
+        </form>
+    </main>
+</div>

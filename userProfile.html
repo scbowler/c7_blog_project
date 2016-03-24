@@ -1,0 +1,44 @@
+
+
+
+
+
+    <div class="main-body">
+<!--Login Form-->
+        <div ng-hide="uc.loggedIn" id="loginForm">
+            <form>
+                <input type="text" placeholder="name" class="success" id="name">
+                <input type="text" placeholder="password" id="password">
+                <input type="button" id="button" value="Log In" ng-click="uc.loginUser()">
+                <div id="message"></div>
+            </form>
+        </div>
+
+<!--Account Setting Form-->
+        <div ng-show="uc.loggedIn" id="userSettings">
+            <button ng-click="uc.sendCharacter()">Load a Dummy</button>
+            <h1>{{uc.userData.name}}'s Account</h1>
+            <table class="table table-bordered table-hover">
+                <tbody>
+                <tr>
+                    <th>Name</th>
+                    <th>{{uc.userData.name}}</th>
+                    <th><button class="btn btn-warning" ng-click="uc.doSometing()">Edit</button></th>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <th>{{uc.userData.name}}@gmail.com</th>
+                    <th><button class="btn btn-warning" ng-click="uc.doSometing()">Edit</button></th>
+                </tr>
+                <tr>
+                    <th>Id</th>
+                    <th>{{$index}}</th>
+                    <th><button class="btn btn-warning" ng-click="uc.doSometing()">Edit</button></th>
+                </tr>
+                </tbody>
+            </table>
+
+            </div>
+        </div>
+    </div>
+
